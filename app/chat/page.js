@@ -1,13 +1,13 @@
 "use client"
 import { useRouter } from 'next/navigation'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, Suspense } from 'react'
 import useSocket from '../hook/socket'
 import { useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 import chkstatus from '../components/chkstatus'
  
 
-const page = () => {
+const Page = () => {
 
   const socketRef = useSocket()
   
@@ -256,7 +256,15 @@ const page = () => {
 
 }
 
-export default page
+// export default page
+
+export default function page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Page />
+    </Suspense>
+  )
+}
 
 
 
