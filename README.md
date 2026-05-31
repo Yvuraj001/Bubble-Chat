@@ -21,9 +21,9 @@ Link : https://bubble-chat-wy6m.onrender.com/
 ### Frontend — create `.env.local` in the root of the frontend directory
 
 ```env
-NEXT_PUBLIC_Socket_Server_URL=https://your-backend-url.com
-NEXT_PUBLIC_Frontend_URL=https://your-frontend-url.com
-NEXT_PUBLIC_POST_URL=https://your-backend-url.com/chk
+NEXT_PUBLIC_POST_URL=http://localhost:4000/chk
+NEXT_PUBLIC_Socket_Server_URL=http://localhost:4000
+NEXT_PUBLIC_MESSAGE_Server_URL=http://localhost:4000/get_messages
 ```
 
 > For local development:
@@ -40,6 +40,7 @@ NEXT_PUBLIC_POST_URL=https://your-backend-url.com/chk
 ```env
 PORT=4000
 CLIENT_URL=https://your-frontend-url.com
+REDIS_URL=yourlocalurl
 ```
 
 > For local development:
