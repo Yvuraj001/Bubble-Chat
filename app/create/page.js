@@ -14,6 +14,6 @@ const page = () => {
 export default page
 
 export const metadata = {
-  title: "Create Your Room",
+  title: "Bubble / Create Room",
   description: "here you can create a room for private conversations",
 };

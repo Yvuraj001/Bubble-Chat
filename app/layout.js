@@ -4,7 +4,7 @@ import { ToastContainer, Slide } from "react-toastify";
 
 import "./globals.css";
 export const metadata = {
-  title: "Bubble - Instant Chat ",
+  title: "Bubble / Instant Chat ",
   description: "A service that let you chat to your friends without having to login or create account.",
   verification: {
     google: "google6303c4a18fefe718.html",
@@ -24,8 +24,10 @@ export default function RootLayout({ children }) {
         <Navbar />
         <ToastContainer
           position="top-right"
-          autoClose={1300}
-          hideProgressBar={false}
+           autoClose={false}
+          hideProgressBar={true}
+           
+          
           newestOnTop={false}
           closeOnClick
           rtl={false}

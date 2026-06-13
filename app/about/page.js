@@ -13,6 +13,6 @@ const page = () => {
 export default page
 
 export const metadata = {
-  title: "About - Bubble",
+  title: "Bubble / About",
   description: "Here you will know how to use this."
 };

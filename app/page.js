@@ -19,9 +19,11 @@ const page = () => {
             <Logo />
           </div>
 
-          <p className="text-emerald-200/70 text-lg tracking-widest uppercase">
+           <div className="text-emerald-200/70 text-lg tracking-widest uppercase">
             Instant rooms. Real-time chat.
-          </p>
+            <p className='text-sm text-center mt-1'>Free Chat App</p>
+          
+          </div>
           <div className='flex gap-4'>
             <div className="actions flex gap-4">
               <button ><Button1 text={"Create/Join Room"} /></button>
