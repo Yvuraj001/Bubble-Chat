@@ -163,21 +163,21 @@ const Page = () => {
 
   // Alert on reloading page
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = (e) => {
-  //     e.preventDefault();
-  //   };
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+    };
 
-  //   window.addEventListener("beforeunload", handleBeforeUnload, {
-  //     capture: true,
-  //   });
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
 
-  //   return () => {
-  //     window.removeEventListener("beforeunload", handleBeforeUnload, {
-  //       capture: true,
-  //     });
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
+  }, []);
 
   // Gettign server response
 
@@ -205,7 +205,7 @@ const Page = () => {
   }, [showError]);
 
   return (
-    <div className="relative h-[95%]">
+    <div className="relative h-full">
       <div className="relative flex flex-col h-full bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
         {/* error overlay */}
         {showError && (
