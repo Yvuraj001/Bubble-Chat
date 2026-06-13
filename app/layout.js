@@ -9,6 +9,9 @@ export const metadata = {
   verification: {
     google: "google6303c4a18fefe718.html",
   },
+  other: {
+    "google-adsense-account": "ca-pub-8180810397719502",
+  }
 };
 
 export default function RootLayout({ children }) {
