@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from '../components/logo'
+import Footer from '../components/footer';
 
 export default function PrivacyPage() {
   return (
@@ -38,11 +39,15 @@ export default function PrivacyPage() {
         <div className="text-emerald-200/60 text-sm text-center">If you have questions, open an issue or contact the project on GitHub.</div>
 
       </div>
+      <Footer/>
     </main>
   )
 }
 
 export const metadata = {
-  title: "Bubble / Privacy",
+  title: "Privacy - Bubble",
   description: "Privacy policy: Bubble does not collect or share user data.",
+  alternates: {
+    canonical: "https://bubble-chat-wy6m.onrender.com/privacy",
+  },
 };

@@ -4,8 +4,11 @@ import { ToastContainer, Slide } from "react-toastify";
 import "./globals.css";
 export const metadata = {
   title: "Bubble / Instant Chat ",
-  description:
-    "A service that let you chat to your friends without having to login or create account.",
+   description:
+    "Create temporary chat rooms instantly. No signup, no phone number, no app download. Share a link and start chatting in real time.",
+  alternates: {
+    canonical: "https://bubble-chat-wy6m.onrender.com",
+  },
 };
 
 export default function RootLayout({ children }) {
