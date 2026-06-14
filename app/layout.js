@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 
   return (
-   <html lang="en" className="overscroll-y-none bg-[#05644b]">
+   <html lang="en" className="bg-[#05644b]">
       <body className="h-screen">
         <Navbar />
         <ToastContainer
