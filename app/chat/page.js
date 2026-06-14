@@ -23,7 +23,7 @@ const Page = () => {
   const [senderID, setsenderID] = useState("");
   const [Sender, setSender] = useState("");
   const [Count, setCount] = useState(1);
-  const [isuser, setisuser] = useState("Everybody");
+
   const [isactive, setisactive] = useState(false);
   const [messages, setmessages] = useState([]);
   const [showError, setshowError] = useState(false);
@@ -73,7 +73,7 @@ const Page = () => {
     socket.on("recived-message", ({ message, senderID, sender }) => {
       if (senderID === socket.id) return;
       setisactive(true);
-      setisuser(sender);
+
       setmessages((prev) => [
         ...prev,
         { text: message, sender: sender, type: "recived" },
@@ -91,12 +91,12 @@ const Page = () => {
         autoClose: 2100,
       });
 
-      setisuser(username);
+
       setisactive(true);
     });
 
     socket.on("user-left", (user) => {
-      setisuser(user);
+
       setisactive(false);
       toast(<UserLeftToast message={`${user} left the chat.`}/>,
         {
@@ -256,11 +256,7 @@ const Page = () => {
             </p>
           </div>
 
-          {Count < 3 && (
-            <div className="ml-auto flex  items-center justify-center text-[10px] md:text-[14px] gap-2 opacity-80 text-white">
-              {isuser} is {isactive ? "online" : "offline"}
-            </div>
-          )}
+        
 
           <div className="ml-auto flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-600 animate-pulse"></span>
