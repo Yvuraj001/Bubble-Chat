@@ -15,6 +15,7 @@ const Page = () => {
   const socketRef = useSocket();
 
   const scrollEnd = useRef(null);
+  const inputRef = useRef(null)
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -47,6 +48,7 @@ const Page = () => {
     ]);
 
     setmessage("");
+     inputRef.current?.focus();
   };
 
   useEffect(() => {
@@ -394,6 +396,7 @@ const Page = () => {
             <div className="flex-1 flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-emerald-400/60 transition-colors backdrop-blur-sm">
               <input
                 type="text"
+                ref={inputRef}
                 required={true}
                 name="message"
                 placeholder="Type a message..."
@@ -401,6 +404,7 @@ const Page = () => {
                 onChange={(e) => {
                   setmessage(e.target.value);
                 }}
+
                 onPaste={handlePaste}
                 className="flex-1 bg-transparent text-sm text-white placeholder:text-emerald-200/30 outline-none"
               />
