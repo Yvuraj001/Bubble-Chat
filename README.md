@@ -3,7 +3,7 @@
 A real-time chat application built with Next.js and Socket.IO.
 
 ---
-Link : https://bubble-chat-wy6m.onrender.com/
+Link : https://tinyurl.com/bubblechat001
   
 
 ## 🚀 Getting Started
