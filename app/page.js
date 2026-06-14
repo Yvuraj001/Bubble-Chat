@@ -59,7 +59,7 @@ const faqs = [
   },
   {
     q: "Are Bubble Chat messages stored anywhere?",
-    a: "No messages aren't  stored on our servers permenently but temperory but deleted as soon as every lefts the chat. All conversations are ephemeral — when everyone leaves a room, the messages disappear permanently.",
+    a: "Messages are not stored permanently on our servers. They are automatically deleted when all participants leave the room.",
   },
   {
     q: "How do I invite someone to my chat room?",

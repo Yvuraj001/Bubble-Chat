@@ -3,7 +3,7 @@ import { ToastContainer, Slide } from "react-toastify";
 
 import "./globals.css";
 export const metadata = {
-  title: "Bubble / Instant Chat ",
+  title: "Bubble Chat - Free Temporary Anonymous Chat Rooms",
    description:
     "Create temporary chat rooms instantly. No signup, no phone number, no app download. Share a link and start chatting in real time.",
      other: {
