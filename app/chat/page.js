@@ -228,7 +228,7 @@ useEffect(() => {
   }, [showError]);
 console.log(showMessagesToNewUser , replyTo)
   return (
-   <div className="relative h-[calc(100dvh-48px)]">
+  <div className="relative h-full">
       <div className="relative flex flex-col h-full  bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
         {/* error overlay */}
         {showError && (
@@ -300,7 +300,7 @@ console.log(showMessagesToNewUser , replyTo)
 
         <div
           ref={messageContainerRef}
-          className="relative z-10 flex-1 overflow-y-auto px-6 py-6 space-y-3 scrollbar-thin scrollbar-thumb-white/10 overflow-x-hidden bg-[url('/pattern.svg')] bg-repeat   "
+          className="relative z-10 flex-1 overflow-y-auto px-6 py-6 space-y-3 scrollbar-thin scrollbar-thumb-white/10 overflow-x-hidden bg-[url('/pattern.svg')] bg-repeat "
         >
           {messages.length === 0 && showMessagesToNewUser.length < 1 && (
             <div className="flex flex-col items-center justify-center h-full gap-2 opacity-70  ">
