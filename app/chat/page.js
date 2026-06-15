@@ -228,7 +228,7 @@ useEffect(() => {
   }, [showError]);
 console.log(showMessagesToNewUser , replyTo)
   return (
-    <div className="relative  h-full overflow-hidden">
+   <div className="relative h-[calc(100dvh-48px)]">
       <div className="relative flex flex-col h-full  bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
         {/* error overlay */}
         {showError && (
