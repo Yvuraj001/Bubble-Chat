@@ -11,11 +11,12 @@ import {
   UserLeftToast,
 } from "../components/showToast";
 
+
 const Page = () => {
   const socketRef = useSocket();
 
-  const scrollEnd = useRef(null);
-  const inputRef = useRef(null)
+  const messageContainerRef = useRef(null);
+  const inputRef = useRef(null);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,6 +32,8 @@ const Page = () => {
   const [showMessagesToNewUser, setshowMessagesToNewUser] = useState([]);
   const [isnewUser, setisnewUser] = useState(false);
 
+  const [replyTo, setreplyTo] = useState(null);
+
   const handlesubmit = (e) => {
     e.preventDefault();
 
@@ -40,15 +43,24 @@ const Page = () => {
       senderID: senderID,
       sender: Sender,
       type: "sent",
+      time: new Date().getHours() + ":" + new Date().getMinutes(),
+      replyTo: replyTo ? replyTo : null,
     });
 
     setmessages((prev) => [
       ...prev,
-      { text: message, sender: "You", type: "sent" },
+      {
+        text: message,
+        sender: "You",
+        type: "sent",
+        time: new Date().getHours() + ":" + new Date().getMinutes(),
+        replyTo: replyTo ? replyTo : null,
+      },
     ]);
 
     setmessage("");
-     inputRef.current?.focus();
+    setreplyTo(null);
+    inputRef.current?.focus();
   };
 
   useEffect(() => {
@@ -72,19 +84,28 @@ const Page = () => {
       setsenderID(socket.id);
     });
 
-    socket.on("recived-message", ({ message, senderID, sender }) => {
-      if (senderID === socket.id) return;
-      setisactive(true);
+    socket.on(
+      "recived-message",
+      ({ text, senderID, sender, time, replyTo }) => {
+        if (senderID === socket.id) return;
+        setisactive(true);
 
-      setmessages((prev) => [
-        ...prev,
-        { text: message, sender: sender, type: "recived" },
-      ]);
+        setmessages((prev) => [
+          ...prev,
+          {
+            text: text,
+            sender: sender,
+            type: "recived",
+            time: time,
+            replyTo: replyTo,
+          },
+        ]);
 
-      if (document.visibilityState === "hidden") {
-        document.title = "(1) New Message";
-      }
-    });
+        if (document.visibilityState === "hidden") {
+          document.title = "(1) New Message";
+        }
+      },
+    );
     // New user
     socket.on("newuser", (username) => {
       toast(<UserJoinedToast message={`${username} joined the chat.`} />, {
@@ -93,20 +114,16 @@ const Page = () => {
         autoClose: 2100,
       });
 
-
       setisactive(true);
     });
 
     socket.on("user-left", (user) => {
-
       setisactive(false);
-      toast(<UserLeftToast message={`${user} left the chat.`}/>,
-        {
+      toast(<UserLeftToast message={`${user} left the chat.`} />, {
         closeButton: false,
         className: "!bg-transparent !shadow-none !p-0",
         autoClose: 1600,
-      }
-      );
+      });
     });
     socket.on("room-count", ({ count }) => {
       setCount(count);
@@ -151,13 +168,18 @@ const Page = () => {
 
   // useEffect to scroll to end
   useEffect(() => {
-    scrollEnd.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messageContainerRef.current;
+
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages, showMessagesToNewUser]);
 
   // useEffect to change title back to normal when user comes back to page
   useEffect(() => {
     const reset = () => {
-      if (document.visibilityState === "visible") document.title = "Bubble / Chat";
+      if (document.visibilityState === "visible")
+        document.title = "Bubble / Chat";
     };
     document.addEventListener("visibilitychange", reset);
     return () => document.removeEventListener("visibilitychange", reset);
@@ -205,9 +227,9 @@ const Page = () => {
     const timer = setTimeout(() => router.push("/"), 3000);
     return () => clearTimeout(timer);
   }, [showError]);
-
+console.log(showMessagesToNewUser , replyTo)
   return (
-    <div className="relative h-full">
+    <div className="relative  h-full ">
       <div className="relative flex flex-col h-full bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
         {/* error overlay */}
         {showError && (
@@ -244,7 +266,7 @@ const Page = () => {
         <div className="absolute inset-0   pointer-events-none" />
 
         {/* Header */}
-        <div className="relative z-10 flex items-center gap-3 px-1 md:px-6 py-2 border-b border-white/10 bg-white/5 backdrop-blur-3xl">
+        <div className="relative z-10 flex items-center gap-3  md:px-6 p-2.5 border-b border-white/10 bg-white/5 backdrop-blur-3xl">
           <div className="w-9 h-9 rounded-full bg-[#27bb4e] flex items-center justify-center text-[10px] md:text-sm font-bold uppercase shadow-lg">
             {Sender?.[0] || "?"}
           </div>
@@ -257,8 +279,6 @@ const Page = () => {
               <strong className="uppercase">{roomName || "..."}</strong>
             </p>
           </div>
-
-        
 
           <div className="ml-auto flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-600 animate-pulse"></span>
@@ -279,7 +299,10 @@ const Page = () => {
 
         {/* Messages Area */}
 
-        <div className="relative z-10 flex-1 overflow-y-auto px-6 py-6 space-y-3 scrollbar-thin scrollbar-thumb-white/10 overflow-x-hidden bg-[url('/pattern.svg')] bg-repeat   ">
+        <div
+          ref={messageContainerRef}
+          className="relative z-10 flex-1 overflow-y-auto px-6 py-6 space-y-3 scrollbar-thin scrollbar-thumb-white/10 overflow-x-hidden bg-[url('/pattern.svg')] bg-repeat   "
+        >
           {messages.length === 0 && showMessagesToNewUser.length < 1 && (
             <div className="flex flex-col items-center justify-center h-full gap-2 opacity-70  ">
               <svg
@@ -305,8 +328,12 @@ const Page = () => {
               >
                 Waiting for messages.
               </p>
+              <p className="text-sm opacity-[0.7] font-mono">
+               Remember: room name are CASE-SENSITIVE
+              </p>
             </div>
           )}
+
           {/* showing message to new user */}
 
           {showMessagesToNewUser.length > 0 && (
@@ -314,7 +341,7 @@ const Page = () => {
               className={`flex flex-col gap-3 mt-6 ${isnewUser ? "" : "hidden"}`}
             >
               <h2 className="text-sm text-emerald-300/60 uppercase tracking-widest">
-                Previous Messages
+                Previously
               </h2>
               {showMessagesToNewUser.map((msg, i) => (
                 <div
@@ -323,7 +350,19 @@ const Page = () => {
                     msg.sender === Sender ? "items-end" : "items-start"
                   }`}
                 >
-                  <span className="text-[11px] text-emerald-300/50 px-1">
+                  {/*  shwoing reply above the message*/}
+
+                  {msg.replyTo && (
+                    <div>
+                      <div className="border-l-4 border-green-500 pl-2 mb-2 text-xs">
+                        <div className="font-semibold">
+                          {msg.replyTo.sender}
+                        </div>
+                        <div className="opacity-70">{msg.replyTo.text}</div>
+                      </div>
+                    </div>
+                  )}
+                  <span className="text-[11px] text-emerald-300/80 px-1">
                     {msg.sender === Sender
                       ? "You"
                       : msg.sender || "not specified"}
@@ -336,7 +375,23 @@ const Page = () => {
                 : "bg-white/10 text-white/90 rounded-bl-sm backdrop-blur-sm border border-white/10"
             }`}
                   >
-                    {msg.message}{" "}
+                    {msg.text}{" "}
+                  </div>
+
+                  {/* showing reply button and time */}
+                  <div className="flex gap-3 items-center">
+                    <button
+                      className=" text-sm text-green-300 cursor-pointer"
+                      onClick={() => {
+                        setreplyTo(msg);
+                        inputRef.current?.focus();
+                      }}
+                    >
+                      Reply
+                    </button>
+                    <span className="text-[11px] text-emerald-300/50 px-1 flex gap-3">
+                      {msg.time || "00:00"}
+                    </span>
                   </div>
                 </div>
               ))}
@@ -358,7 +413,17 @@ const Page = () => {
               key={i}
               className={`flex flex-col gap-1 ${msg.type === "sent" ? "items-end" : "items-start"}`}
             >
-              <span className="text-[11px] text-emerald-300/50 px-1">
+              {/*  shwoing reply above the message*/}
+
+              {msg.replyTo && (
+                <div>
+                  <div className="border-l-4 border-green-500 pl-2 mb-2 text-xs">
+                    <div className="font-semibold">{msg.replyTo.sender}</div>
+                    <div className="opacity-70">{msg.replyTo.text}</div>
+                  </div>
+                </div>
+              )}
+              <span className="text-[11px] text-emerald-300/80 px-1">
                 {msg.sender || "not specified"}
               </span>
               <div
@@ -371,13 +436,59 @@ const Page = () => {
               >
                 {msg.text}
               </div>
+
+              <div className="flex gap-3 items-center">
+                <button
+                  className=" text-sm text-green-300 cursor-pointer"
+                  onClick={() => {
+                    setreplyTo(msg);
+                    inputRef.current?.focus();
+                  }}
+                >
+                  Reply
+                </button>
+                <span className="text-[11px] text-emerald-300/50 px-1 flex gap-3">
+                  {msg.time || "00:00"}
+                </span>
+              </div>
             </div>
           ))}
-
-          <div ref={scrollEnd}></div>
         </div>
+        {/* showing reply preview */}
+
+        {replyTo && (
+          <div className="mx-3 mb-2.5 bg-black/25 rounded-xl border border-white/10 px-3 py-2.5 flex items-center gap-3 ">
+            <div className="w-0.5 self-stretch bg-[#27bb4e] shrink-0" />
+            <div className="flex-1 overflow-hidden">
+              <p className="text-[11px] font-medium text-green-400 mb-1 tracking-wide">
+                {replyTo.sender}
+              </p>
+              <div className="h-px bg-white/10 mb-1" />
+              <p className="text-[12px] text-white/65 truncate">
+                {replyTo.text}
+              </p>
+            </div>
+            <button
+              onClick={() => setreplyTo(null)}
+              className="w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 hover:text-white flex items-center justify-center text-white/50 transition-all shrink-0"
+            >
+              <svg
+                width="11"
+                height="11"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
 
         {/* Input Area */}
+
         <div className="relative z-10 px-6 py-4 border-t border-white/10 bg-white/5 backdrop-blur-sm">
           <form onSubmit={handlesubmit} className="flex items-center gap-3">
             <input
@@ -393,18 +504,17 @@ const Page = () => {
               defaultValue={Sender || ""}
             />
 
-            <div className="flex-1 flex items-center gap-3 bg-white/10 border border-white/10 rounded-xl px-4 py-2.5 focus-within:border-emerald-400/60 transition-colors backdrop-blur-sm">
+            <div className="flex-1 flex items-center gap-3 bg-white/10 border-2 border-white/10 rounded-xl px-4 py-2.5 focus-within:border-emerald-400/60 transition-colors backdrop-blur-sm">
               <input
                 type="text"
-                ref={inputRef}
                 required={true}
+                ref={inputRef}
                 name="message"
                 placeholder="Type a message..."
                 value={message}
                 onChange={(e) => {
                   setmessage(e.target.value);
                 }}
-
                 onPaste={handlePaste}
                 className="flex-1 bg-transparent text-sm text-white placeholder:text-emerald-200/30 outline-none"
               />

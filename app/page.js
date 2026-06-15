@@ -59,7 +59,7 @@ const faqs = [
   },
   {
     q: "Are Bubble Chat messages stored anywhere?",
-    a: "Messages are not stored permanently on our servers. They are automatically deleted when all participants leave the room.",
+    a: "No messages aren't  stored on our servers permenently but temperory but deleted as soon as every lefts the chat. All conversations are temporary — when everyone leaves a room, the messages disappear permanently.",
   },
   {
     q: "How do I invite someone to my chat room?",
@@ -288,7 +288,7 @@ export default function Page() {
             {
               step: "2",
               title: "Create or Join a Room",
-              desc: "Generate a new room instantly or enter a room code to join a friend.",
+              desc: "Type any room code and or decide with your friend then share room code to join a friend.",
             },
             {
               step: "3",
@@ -351,4 +351,4 @@ export default function Page() {
       <Footer />
     </main>
   );
-}
+} 
