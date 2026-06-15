@@ -1,4 +1,6 @@
 import React from 'react'
+import Link from 'next/link'
+
 
 const footer = () => {
   return (
@@ -6,33 +8,24 @@ const footer = () => {
       <nav aria-label="Footer navigation">
         <ul className="flex flex-wrap justify-center gap-6 text-xs text-emerald-200/40 mb-6">
           <li>
-            <a href="/" className="hover:text-emerald-200/70 transition-colors">
+            <Link href="/" className="hover:text-emerald-200/70 transition-colors">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/about"
-              className="hover:text-emerald-200/70 transition-colors"
-            >
+            <Link href="/about" className="hover:text-emerald-200/70 transition-colors">
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/privacy"
-              className="hover:text-emerald-200/70 transition-colors"
-            >
+            <Link href="/privacy" className="hover:text-emerald-200/70 transition-colors">
               Privacy Policy
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="/faq"
-              className="hover:text-emerald-200/70 transition-colors"
-            >
+            <Link href="/faq" className="hover:text-emerald-200/70 transition-colors">
               FAQ
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
