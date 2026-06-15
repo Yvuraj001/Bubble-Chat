@@ -167,13 +167,12 @@ const Page = () => {
   }, [roomName]);
 
   // useEffect to scroll to end
-  useEffect(() => {
-    const container = messageContainerRef.current;
-
-    if (container) {
-      container.scrollTop = container.scrollHeight;
-    }
-  }, [messages, showMessagesToNewUser]);
+useEffect(() => {
+  const container = messageContainerRef.current;
+  if (container && (messages.length > 0 || showMessagesToNewUser.length > 0)) {
+    container.scrollTop = container.scrollHeight;
+  }
+}, [messages, showMessagesToNewUser]);
 
   // useEffect to change title back to normal when user comes back to page
   useEffect(() => {
@@ -229,8 +228,8 @@ const Page = () => {
   }, [showError]);
 console.log(showMessagesToNewUser , replyTo)
   return (
-    <div className="relative  h-full ">
-      <div className="relative flex flex-col h-full overflow-hidden bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
+    <div className="relative  h-full overflow-hidden">
+      <div className="relative flex flex-col h-full  bg-linear-to-br  from-[#03341f] via-[#1b6137] to-[#0d3d1ff0] text-white font-sans overflow-hidden">
         {/* error overlay */}
         {showError && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">

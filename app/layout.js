@@ -16,8 +16,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className=" bg-[#05644b] h-full">
-      <body className="h-full flex flex-col">
+ <html lang="en" className="bg-[#05644b] h-dvh">
+  <body className="flex flex-col h-dvh">
         <Navbar />
         <ToastContainer
           position="top-right"
