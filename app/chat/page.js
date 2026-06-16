@@ -507,6 +507,7 @@ console.log(showMessagesToNewUser , replyTo)
               <input
                 type="text"
                 required={true}
+                autoComplete="off"
                 ref={inputRef}
                 name="message"
                 placeholder="Type a message..."
