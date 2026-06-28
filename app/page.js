@@ -83,7 +83,7 @@ export default function Page() {
   return (
     <main
       role="main"
-      className="relative w-full min-h-[50vh] bg-linear-to-br from-[#022c22] via-[#065f46] to-[#0d9488] overflow-hidden"
+      className="relative w-full min-h-[50vh] bg-linear-to-br from-[#022c22] via-[#065f46] to-[#0d9488]"
     >
       <div
         aria-hidden="true"
