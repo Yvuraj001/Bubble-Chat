@@ -2,14 +2,18 @@
 
 A real-time chat application built with Next.js and Socket.IO.
 
+(of course ui is made up by ai because my main proirity while making this was to learn how socket works and some basic about messanging. so i built ui with ai)
+
 ---
 Demo : https://tinyurl.com/bubblechat001
   
 ### Home Page 
-<img width="1468" height="803" alt="image" src="https://github.com/user-attachments/assets/1c3994e0-d464-46f3-90d4-df1c52dc53e1" />
+<img width="1710" height="954" alt="image" src="https://github.com/user-attachments/assets/0f0bf9a5-71d6-47b8-af64-32b799bcbf14" />
+
 
 ### Chat Page
-<img width="1470" height="803" alt="image" src="https://github.com/user-attachments/assets/24f58890-dd23-4f9f-b93a-5e1b20689ff5" />
+<img width="1710" height="952" alt="image" src="https://github.com/user-attachments/assets/2ee84d4b-fe48-4210-9e07-89b6b1393024" />
+
 
 
 ## ⚙️ Environment Setup
