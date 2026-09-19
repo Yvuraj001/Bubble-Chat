@@ -1,178 +1,95 @@
+import React from "react";
+
 export const WarningToast = ({ message, onClose }) => {
   return (
-    <div className="max-w-lg rounded-xl border shadow-md p-2 text-sm overflow-hidden bg-yellow-900 border-yellow-300 pointer-events-auto absolute right-0">
-      <div className="flex gap-2 justify-between ml-1 text-yellow-50">
-        <div className="flex min-w-0 items-start gap-2">
-          <div className="h-6 flex items-center">
-            <div
-              style={{
-                width: 20,
-                height: 20,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-label="Warning"
-              >
-                <path d="M8.708 3.708a1.5 1.5 0 0 1 2.466-.173l.118.173 6.5 11.03A1.5 1.5 0 0 1 16.5 17h-13a1.5 1.5 0 0 1-1.292-2.262zm1.684.45a.5.5 0 0 0-.823.058l-6.5 11.03A.5.5 0 0 0 3.5 16h13a.5.5 0 0 0 .43-.754l-6.5-11.03zM10 13a.75.75 0 1 1 0 1.5.75.75 0 0 1 0-1.5m0-5a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-1 0v-3A.5.5 0 0 1 10 8" />
-              </svg>
-            </div>
-          </div>
-
-          <div className="mt-0.5 min-w-0 break-words">
-            <div className="select-text  text-amber-400">
-              {message || "Message not set"}
-            </div>
-          </div>
+    <div className="w-full max-w-sm rounded-2xl border border-amber-500/30 bg-[#161208]/95 backdrop-blur-xl p-3.5 shadow-2xl text-slate-100 flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-400 flex items-center justify-center shrink-0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
         </div>
-
+        <span className="text-xs font-medium text-amber-200 truncate">
+          {message || "Warning"}
+        </span>
+      </div>
+      {onClose && (
         <button
           onClick={onClose}
           type="button"
-          aria-label="Close"
-          className="inline-flex items-center justify-center h-6 w-6 rounded-md hover:bg-yellow-800 transition-colors"
+          className="p-1 rounded-lg text-amber-400/60 hover:text-amber-200 hover:bg-white/10 transition-colors"
         >
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M15.147 4.146a.5.5 0 0 1 .707.707L10.707 10l5.147 5.147a.5.5 0 0 1-.63.771l-.078-.064L10 10.707l-5.146 5.147a.5.5 0 0 1-.708-.707L9.293 10 4.146 4.853a.5.5 0 0 1 .708-.707L10 9.293z" />
-            </svg>
-          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
-      </div>
+      )}
     </div>
   );
 };
 
 export const UserJoinedToast = ({ message, onClose }) => {
   return (
-    <div className="max-w-lg rounded-xl border shadow-md p-2 text-[16px] overflow-hidden bg-green-900 border-green-300 pointer-events-auto absolute right-0">
-      <div className="flex gap-2 justify-between ml-1 text-green-50">
-        <div className="flex min-w-0 items-start gap-2">
-          <div className="h-6 flex items-center">
-            <div
-              style={{
-                width: 20,
-                height: 20,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-label="Success"
-                className="text-green-400"
-              >
-                <path d="M10 0a10 10 0 100 20 10 10 0 000-20zm4.03 7.28a.75.75 0 010 1.06l-4.5 4.5a.75.75 0 01-1.06 0L5.97 10.34a.75.75 0 111.06-1.06L9 11.25l3.97-3.97a.75.75 0 011.06 0z" />
-              </svg>
-            </div>
-          </div>
-
-          <div className="mt-0.5 min-w-0 break-words">
-            <div className="select-text text-green-400">
-              {message || "A user joined the chat"}
-            </div>
-          </div>
+    <div className="w-full max-w-sm rounded-2xl border border-emerald-500/30 bg-[#071510]/95 backdrop-blur-xl p-3.5 shadow-2xl text-slate-100 flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center shrink-0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <line x1="20" y1="8" x2="20" y2="14" />
+            <line x1="23" y1="11" x2="17" y2="11" />
+          </svg>
         </div>
-
+        <span className="text-xs font-semibold text-emerald-200 truncate">
+          {message || "A user joined the room"}
+        </span>
+      </div>
+      {onClose && (
         <button
           onClick={onClose}
           type="button"
-          aria-label="Close"
-          className="inline-flex items-center justify-center h-6 w-6 rounded-md hover:bg-green-800 transition-colors"
+          className="p-1 rounded-lg text-emerald-400/60 hover:text-emerald-200 hover:bg-white/10 transition-colors"
         >
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M15.147 4.146a.5.5 0 0 1 .707.707L10.707 10l5.147 5.147a.5.5 0 0 1-.707.707L10 10.707l-5.147 5.147a.5.5 0 0 1-.707-.707L9.293 10 4.146 4.853a.5.5 0 0 1 .707-.707L10 9.293z" />
-            </svg>
-          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
-      </div>
+      )}
     </div>
   );
 };
 
 export const UserLeftToast = ({ message, onClose }) => {
   return (
-    <div className="max-w-lg rounded-xl border shadow-md p-2 text-[16px] overflow-hidden bg-red-900 border-red-300 pointer-events-auto absolute right-0">
-      <div className="flex gap-2 justify-between ml-1 text-red-50">
-        <div className="flex min-w-0 items-start gap-2">
-          <div className="h-6 flex items-center">
-            <div
-              style={{
-                width: 20,
-                height: 20,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-label="User Left"
-                className="text-red-400"
-              >
-                <path d="M10 0a10 10 0 100 20 10 10 0 000-20zm3.53 12.47a.75.75 0 01-1.06 1.06L10 11.06l-2.47 2.47a.75.75 0 01-1.06-1.06L8.94 10 6.47 7.53a.75.75 0 011.06-1.06L10 8.94l2.47-2.47a.75.75 0 011.06 1.06L11.06 10l2.47 2.47z" />
-              </svg>
-            </div>
-          </div>
-
-          <div className="mt-0.5 min-w-0 break-words">
-            <div className="select-text text-red-400">
-              {message || "A user left the chat"}
-            </div>
-          </div>
+    <div className="w-full max-w-sm rounded-2xl border border-rose-500/30 bg-[#17090b]/95 backdrop-blur-xl p-3.5 shadow-2xl text-slate-100 flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3 min-w-0">
+        <div className="w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/30 text-rose-400 flex items-center justify-center shrink-0">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="8.5" cy="7" r="4" />
+            <line x1="23" y1="11" x2="17" y2="11" />
+          </svg>
         </div>
-
+        <span className="text-xs font-semibold text-rose-200 truncate">
+          {message || "A user left the room"}
+        </span>
+      </div>
+      {onClose && (
         <button
           onClick={onClose}
           type="button"
-          aria-label="Close"
-          className="inline-flex items-center justify-center h-6 w-6 rounded-md hover:bg-red-800 transition-colors"
+          className="p-1 rounded-lg text-rose-400/60 hover:text-rose-200 hover:bg-white/10 transition-colors"
         >
-          <div
-            style={{
-              width: 12,
-              height: 12,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M15.147 4.146a.5.5 0 0 1 .707.707L10.707 10l5.147 5.147a.5.5 0 0 1-.707.707L10 10.707l-5.147 5.147a.5.5 0 0 1-.707-.707L9.293 10 4.146 4.853a.5.5 0 0 1 .707-.707L10 9.293z" />
-            </svg>
-          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
-      </div>
+      )}
     </div>
   );
 };

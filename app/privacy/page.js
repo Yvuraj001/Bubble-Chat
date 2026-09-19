@@ -1,77 +1,79 @@
-import React from 'react'
-import Logo from '../components/logo'
+import React from 'react';
+import Logo from '../components/logo';
 import Footer from '../components/footer';
+
+export const metadata = {
+  title: "Privacy Policy - Bubble Chat",
+  description: "Bubble Chat privacy policy: zero tracking, no accounts, no persistent message storage.",
+  alternates: {
+    canonical: "https://bubble-chat-wy6m.onrender.com/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (
-    <main className="relative w-full min-h-screen bg-linear-to-br from-[#022c22] via-[#065f46] to-[#0d9488] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(16,185,129,0.12)_0%,transparent_60%)] pointer-events-none" />
+    <main className="relative w-full min-h-screen bg-[#070a12] text-slate-100 py-12 px-4 sm:px-6 lg:px-8 overflow-hidden flex flex-col justify-between">
+      {/* Ambient background glows */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-emerald-500/10 via-teal-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 flex flex-col gap-12">
-        <div className="flex flex-col items-center gap-4 text-center">
+      <div className="relative z-10 max-w-4xl mx-auto flex flex-col gap-10 w-full mb-12">
+        <div className="flex flex-col items-center text-center gap-4">
           <Logo />
-          <p className="text-emerald-200/60 text-sm tracking-widest uppercase">
-            Privacy & Policy
-          </p>
-          <h1 className="text-white text-3xl font-bold leading-tight">
-            We don't collect your data
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-widest mt-2">
+            Data Privacy & Security
+          </div>
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            We don't collect or store your data. Period.
           </h1>
-          <p className="text-emerald-200/60 text-base leading-relaxed max-w-xl">
-            Bubble is built for private, temporary conversations. This site does
-            not collect personal information, does not store chat messages on
-            any persistent database, and does not send any user data to
-            third-party services or analytics providers.
+          <p className="text-sm sm:text-base text-slate-400 max-w-2xl leading-relaxed">
+            Bubble is engineered from the ground up for ephemeral communication. We do not sell data, we do not monetize your chats, and we do not run user-tracking scripts.
           </p>
         </div>
 
-        <div className="bg-white/5 border border-emerald-400/20 backdrop-blur-sm rounded-2xl p-8 flex flex-col gap-4">
-          <h2 className="text-white font-semibold text-xl">
-            What we do (and don't)
+        {/* Guarantees Box */}
+        <div className="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 space-y-6">
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Core Privacy Principles</span>
           </h2>
-          <ul className="text-emerald-200/60 list-disc ml-5 space-y-2">
-            <li>
-              This site does not collect names, email addresses, or profile
-              data.
-            </li>
-            <li>
-              Messages are temporary and not persisted to a permanent storage by
-              design.
-            </li>
-            <li>
-              We do not use analytics, trackers, or advertising services that
-              share data with third parties.
-            </li>
-            <li>
-              No personal data is sold, shared, or otherwise provided to
-              external companies.
-            </li>
-          </ul>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
+              <h3 className="text-sm font-bold text-emerald-400 mb-1">Zero Registration</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                We never ask for emails, phone numbers, passwords, real names, or social logins.
+              </p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
+              <h3 className="text-sm font-bold text-emerald-400 mb-1">Ephemeral RAM Delivery</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Messages stream directly between active peers in RAM. When rooms close, memory buffers are wiped.
+              </p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
+              <h3 className="text-sm font-bold text-emerald-400 mb-1">No Tracking or Ad SDKs</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                No third-party tracking scripts, fingerprinting libraries, or advertising analytics run on this platform.
+              </p>
+            </div>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-5">
+              <h3 className="text-sm font-bold text-emerald-400 mb-1">No Data Monetization</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                We never monetize, profile, sell, or disclose your metadata to brokers or advertisers.
+              </p>
+            </div>
+          </div>
         </div>
 
-        <div className="bg-white/5 border border-emerald-400/20 backdrop-blur-sm rounded-2xl p-6 flex flex-col gap-3">
-          <h3 className="text-white font-semibold">
-            Cookies & Third-Party Tools
-          </h3>
-          <p className="text-emerald-200/60 text-sm">
-            We do not use cookies for tracking. Minimal technical cookies or
-            headers required for basic operation (routing, WebSocket handshakes)
-            may be used but are not used to identify you.
+        {/* Technical details */}
+        <div className="glass-panel rounded-3xl p-6 sm:p-8 border border-white/10">
+          <h3 className="text-base font-bold text-white mb-2">Cookies & Local Storage</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Bubble only utilizes your browser's local storage if you explicitly check "Remember my details locally" to store your chosen handle and room name for your convenience. No marketing cookies are used.
           </p>
-        </div>
-
-        <div className="text-emerald-200/60 text-sm text-center">
-          If you have questions, open an issue or contact the project on GitHub.
         </div>
       </div>
+
       <Footer />
     </main>
   );
 }
-
-export const metadata = {
-  title: "Privacy / Bubble",
-  description: "Privacy policy: Bubble does not collect or share user data.",
-  alternates: {
-    canonical: "https://bubblechat.com/privacy",
-  },
-};

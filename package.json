@@ -6,7 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "dev": "next dev --turbo"
+    "dev": "next dev "
   },
   "dependencies": {
     "next": "^16.2.4",

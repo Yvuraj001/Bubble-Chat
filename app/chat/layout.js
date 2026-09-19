@@ -1,8 +1,8 @@
 export const metadata = {
-  title: "Bubble / Chat",
-  description: "Real-time chat app",
+  title: "Chat Room - Bubble Chat",
+  description: "Anonymous real-time chat room.",
   alternates: {
-    canonical: "https://bubblechat.com/chat",
+    canonical: "https://bubble-chat-wy6m.onrender.com/chat",
   },
 };
 
