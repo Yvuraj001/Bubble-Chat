@@ -14,8 +14,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark h-dvh bg-[#070a12] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
-      <body className="flex flex-col h-dvh bg-[#070a12] text-slate-100 overflow-x-hidden font-sans">
+    <html lang="en" className="dark min-h-screen bg-[#0b0b0e] text-white antialiased selection:bg-[#e10098] selection:text-white">
+      <body className="flex flex-col min-h-screen bg-[#0b0b0e] text-white overflow-x-hidden font-body">
         <Navbar />
         <ToastContainer
           position="top-right"
@@ -29,9 +29,9 @@ export default function RootLayout({ children }) {
           pauseOnHover
           theme="dark"
           transition={Slide}
-          toastClassName="!bg-[#111726]/95 !border !border-white/10 !backdrop-blur-xl !rounded-2xl !shadow-2xl !text-slate-100"
+          toastClassName="!bg-[#141419] !border !border-[#26262e] !rounded-xl !shadow-2xl !text-white !p-0 font-mono"
         />
-        <main className="flex-1 min-h-0 flex flex-col">{children}</main>
+        <main className="flex-1 flex flex-col">{children}</main>
       </body>
     </html>
   );

@@ -1,317 +1,366 @@
-import "./globals.css";
-import { Button1 } from "./components/Buttons";
-import Logo from "./components/logo";
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Footer from "./components/footer";
-import { faqs, features } from "./constants";
-
-
+import { faqs } from "./constants";
 
 export default function Page() {
+  const router = useRouter();
+
+  const [handle, setHandle] = useState("");
+  const [room, setRoom] = useState("");
+
+  const generateRandomRoom = () => {
+    const adjectives = ["stealth", "cozy", "silent", "secret", "neon", "amber", "hidden", "cosmic"];
+    const nouns = ["haven", "oasis", "signal", "relay", "stream", "bubble", "vault", "grove"];
+    const num = Math.floor(100 + Math.random() * 900);
+    setRoom(`${adjectives[Math.floor(Math.random() * adjectives.length)]}-${nouns[Math.floor(Math.random() * nouns.length)]}-${num}`);
+  };
+
+  const handleHeroSubmit = (e) => {
+    e.preventDefault();
+    const finalName = handle.trim() || `anon-${Math.floor(100 + Math.random() * 900)}`;
+    const finalRoom = room.trim() || `room-${Math.floor(1000 + Math.random() * 9000)}`;
+    if (typeof window !== "undefined") {
+      localStorage.setItem("name", finalName);
+      localStorage.setItem("roomName", finalRoom);
+    }
+    router.push(`/chat?room=${encodeURIComponent(finalRoom)}&name=${encodeURIComponent(finalName)}`);
+  };
+
+  const handleInstantRoom = () => {
+    const randHandle = `guest-${Math.floor(100 + Math.random() * 900)}`;
+    const adjectives = ["swift", "hyper", "cipher", "flux", "void", "nova"];
+    const nouns = ["chamber", "portal", "channel", "lounge", "spot"];
+    const randRoom = `${adjectives[Math.floor(Math.random() * adjectives.length)]}-${nouns[Math.floor(Math.random() * nouns.length)]}-${Math.floor(100 + Math.random() * 900)}`;
+    if (typeof window !== "undefined") {
+      localStorage.setItem("name", randHandle);
+      localStorage.setItem("roomName", randRoom);
+    }
+    router.push(`/chat?room=${encodeURIComponent(randRoom)}&name=${encodeURIComponent(randHandle)}`);
+  };
+
+  const benefits = [
+    {
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+      ),
+      label: "No account",
+      desc: "No email, no phone, no password. Pick a name and go.",
+    },
+    {
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+      ),
+      label: "Messages disappear",
+      desc: "When you close the tab, your conversation is gone forever.",
+    },
+    {
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      ),
+      label: "Instant & live",
+      desc: "Messages appear in real time — no refresh, no lag.",
+    },
+    {
+      icon: (
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+      ),
+      label: "Nothing saved",
+      desc: "We don't store chats on any server — not even temporarily.",
+    },
+  ];
+
+  const steps = [
+    {
+      num: "1",
+      title: "Pick a name",
+      desc: "Choose any display name you like — no real info required.",
+    },
+    {
+      num: "2",
+      title: "Create or join a room",
+      desc: "Make up any room name, or use a code someone shared with you.",
+    },
+    {
+      num: "3",
+      title: "Chat, then vanish",
+      desc: "Talk freely. Close the tab and every message is gone for good.",
+    },
+  ];
+
   return (
-    <div className="relative w-full bg-[#070a12] text-slate-100 h-screen flex flex-col overflow-x-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-emerald-500/10 via-teal-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/3 -left-48 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-2/3 -right-48 w-96 h-96 bg-teal-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="relative w-full bg-[#0b0b0e] text-white flex flex-col min-h-screen overflow-x-hidden font-body">
 
-      {/* Hero Section */}
-      <section
-        aria-label="Hero"
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-20 flex flex-col items-center text-center"
-      >
+      {/* ─── HERO ─────────────────────────────────────────────────── */}
+      <section className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-20 pb-16 w-full text-center">
 
-        {/* Brand emblem */}
-        <div className="mb-6 scale-90 sm:scale-100">
-          <Logo />
+        {/* Eyebrow pill */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#141419] border border-[#26262e] text-[#38bdf8] text-xs font-mono mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse" />
+          <span>No sign-up · No storage · No trace</span>
         </div>
 
-        {/* Catchy headline */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-3xl leading-[1.15]">
-          Private chat rooms that <span className="bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-500 bg-clip-text text-transparent">vanish without a trace.</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading tracking-tight leading-[1.1] text-white">
+          A chat room that{" "}
+          <span className="text-[#e10098]">disappears</span>
+          {" "}when you leave.
         </h1>
 
-        <p className="mt-5 text-base sm:text-lg text-slate-400 max-w-xl leading-relaxed">
-          Create a temporary room in one click. No phone number, no passwords, no app download. When the room closes, everything is gone forever.
+        <p className="mt-6 text-base sm:text-lg text-[#a1a1aa] max-w-xl mx-auto leading-relaxed">
+          Start a private conversation in seconds. No app, no account, no history. Just talk — and walk away clean.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-          <Button1 text="Create / Join Room" />
-          <a
-            href="#how-it-works"
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-sm text-slate-300 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-white/20 transition-all duration-300 backdrop-blur-md"
-          >
-            <span>How it works</span>
-            <svg
-              className="w-4 h-4 text-emerald-400"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
+        {/* ── Room launcher card ── */}
+        <div className="mt-10 w-full max-w-lg mx-auto bg-[#121216] border border-[#26262e] rounded-2xl p-5 text-left">
+          <div className="flex items-center justify-between mb-4">
+            <span className="text-sm font-semibold text-white font-heading">Start chatting</span>
+            <button
+              type="button"
+              onClick={generateRandomRoom}
+              className="flex items-center gap-1.5 text-[11px] font-mono text-[#38bdf8] hover:text-[#0ea5e9] transition-colors cursor-pointer"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-            </svg>
-          </a>
-        </div>
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
+              </svg>
+              Random room
+            </button>
+          </div>
 
-        {/* Quick Highlights Bar */}
-        <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-8 max-w-2xl w-full border-t border-white/[0.08] pt-8">
-          <div className="flex flex-col items-center">
-            <span className="text-xl sm:text-2xl font-bold text-white">0s</span>
-            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5">Signup Friction</span>
-          </div>
-          <div className="flex flex-col items-center border-x border-white/[0.08]">
-            <span className="text-xl sm:text-2xl font-bold text-emerald-400">100%</span>
-            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5">Ephemeral</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-xl sm:text-2xl font-bold text-teal-300">Free</span>
-            <span className="text-[11px] sm:text-xs text-slate-400 mt-0.5">Forever</span>
+          <form onSubmit={handleHeroSubmit} className="flex flex-col sm:flex-row gap-2.5">
+            <input
+              type="text"
+              placeholder="Your name"
+              value={handle}
+              onChange={(e) => setHandle(e.target.value)}
+              className="flex-1 px-4 py-2.5 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
+            />
+            <input
+              type="text"
+              placeholder="Room name"
+              value={room}
+              onChange={(e) => setRoom(e.target.value)}
+              className="flex-1 px-4 py-2.5 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-5 py-2.5 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors cursor-pointer shrink-0"
+            >
+              Enter →
+            </button>
+          </form>
+
+          <div className="mt-4 pt-4 border-t border-[#1e1e26] flex items-center justify-between text-xs text-[#71717a] font-mono">
+            <span>Don&apos;t want to type?</span>
+            <button
+              type="button"
+              onClick={handleInstantRoom}
+              className="text-white hover:text-[#e10098] underline transition-colors cursor-pointer"
+            >
+              1-click instant room →
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Features & Comparison Section */}
-      <section
-        id="features"
-        aria-label="Why choose Bubble Chat"
-        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 w-full"
-      >
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">
-            Engineered for Privacy
+      {/* ─── BENEFITS STRIP ───────────────────────────────────────── */}
+      <section className="relative z-10 w-full border-y border-[#26262e] bg-[#0e0e12] py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {benefits.map((b) => (
+              <div key={b.label} className="flex flex-col gap-3">
+                <div className="w-9 h-9 rounded-lg bg-[#141419] border border-[#26262e] flex items-center justify-center text-[#e10098]">
+                  {b.icon}
+                </div>
+                <div>
+                  <span className="block text-sm font-semibold text-white font-heading">{b.label}</span>
+                  <span className="block text-xs text-[#a1a1aa] mt-0.5 leading-relaxed">{b.desc}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── HOW IT WORKS ─────────────────────────────────────────── */}
+      <section className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-20 w-full">
+        <div className="text-center mb-12">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#38bdf8] px-2.5 py-1 rounded bg-[#141419] border border-[#26262e]">
+            How it works
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Why people choose Bubble over traditional apps
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold text-white font-heading">
+            Three steps, then you&apos;re talking.
           </h2>
-          <p className="mt-2 text-sm text-slate-400">
-            A lighter, faster, and completely disposable way to communicate.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {features.map((f) => (
-            <article
-              key={f.title}
-              className="glass-panel glass-panel-hover rounded-3xl p-7 flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-5">
-                  <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-inner">
-                    {f.icon}
-                  </div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-white/[0.05] text-slate-300 border border-white/[0.08]">
-                    {f.badge}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed mb-6">{f.body}</p>
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 relative">
+          {/* Connector line (desktop only) */}
+          <div className="hidden sm:block absolute top-8 left-[calc(16.67%+1rem)] right-[calc(16.67%+1rem)] h-px bg-[#26262e]" />
 
-              <ul className="space-y-2.5 border-t border-white/[0.06] pt-5">
-                {f.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-center gap-2.5 text-xs text-slate-300">
-                    <div className="w-4 h-4 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
-                      <svg
-                        width="10"
-                        height="10"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-emerald-400"
-                      >
-                        <polyline points="20 6 9 17 4 12" />
-                      </svg>
-                    </div>
-                    <span>{bullet}</span>
+          {steps.map((step, i) => (
+            <div key={step.num} className="relative flex flex-col items-center text-center gap-4">
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-lg font-bold font-mono border ${i === 1 ? "bg-[#e10098] border-[#e10098] text-white" : "bg-[#141419] border-[#26262e] text-white"}`}>
+                {step.num}
+              </div>
+              <div>
+                <h3 className="text-base font-semibold text-white font-heading">{step.title}</h3>
+                <p className="text-sm text-[#a1a1aa] mt-1 leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ─── WHY BUBBLE ───────────────────────────────────────────── */}
+      <section className="relative z-10 w-full bg-[#0e0e12] border-y border-[#26262e] py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            {/* Left: copy */}
+            <div>
+              <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#e10098] px-2.5 py-1 rounded bg-[#141419] border border-[#26262e]">
+                Why Bubble
+              </span>
+              <h2 className="mt-5 text-2xl sm:text-3xl font-bold text-white font-heading leading-tight">
+                Other apps keep records.<br />We&apos;re built to forget.
+              </h2>
+              <p className="mt-4 text-sm sm:text-base text-[#a1a1aa] leading-relaxed">
+                WhatsApp, Telegram, and iMessage all tie your conversations to your identity and save them on their servers. Bubble is different — it holds nothing. The moment you leave, it&apos;s as if the conversation never happened.
+              </p>
+              <ul className="mt-6 space-y-3 text-sm text-[#a1a1aa]">
+                {[
+                  "No phone number or email ever asked",
+                  "Chat history deleted the moment you leave",
+                  "No ads, no tracking, no data sold",
+                  "Works on any browser — no download needed",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <svg className="w-4 h-4 text-[#e10098] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </article>
-          ))}
+            </div>
 
-          {/* Comparison Matrix Card */}
-          <article className="glass-panel glass-panel-hover rounded-3xl p-7 flex flex-col justify-between border-emerald-500/20 bg-gradient-to-b from-[#111928]/80 to-[#0b101c]/80">
-            <div>
-              <div className="flex items-center justify-between mb-5">
-                <div className="w-12 h-12 rounded-2xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center shadow-inner">
-                  <svg
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M16 3h5v5" />
-                    <path d="M8 3H3v5" />
-                    <path d="M12 22v-8.3" />
-                    <path d="M21 3l-8.5 8.5" />
-                    <path d="M3 3l8.5 8.5" />
-                  </svg>
+            {/* Right: comparison card */}
+            <div className="bg-[#121216] border border-[#26262e] rounded-2xl overflow-hidden">
+              {/* Header */}
+              <div className="grid grid-cols-2 border-b border-[#26262e] text-xs font-mono">
+                <div className="px-5 py-3 text-[#a1a1aa] border-r border-[#26262e]">
+                  Other apps
                 </div>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                  Head-to-head
-                </span>
+                <div className="px-5 py-3 text-[#38bdf8] font-semibold">
+                  Bubble
+                </div>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">Bubble vs. Big Tech</h3>
-              <p className="text-sm text-slate-400 leading-relaxed mb-6">
-                Mainstream messengers tie chats to your real-world identity and archive conversations indefinitely.
-              </p>
+              {/* Rows */}
+              {[
+                ["Requires your phone number", "No personal info needed"],
+                ["Saves your chat history", "Messages vanish on exit"],
+                ["Needs an app download", "Any browser, instant access"],
+                ["Tracks & profiles you", "Zero tracking, ever"],
+              ].map(([other, bubble], i) => (
+                <div key={i} className={`grid grid-cols-2 text-xs ${i < 3 ? "border-b border-[#26262e]" : ""}`}>
+                  <div className="px-5 py-3.5 text-[#71717a] border-r border-[#26262e] flex items-start gap-2">
+                    <svg className="w-3.5 h-3.5 text-[#e10098] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                    {other}
+                  </div>
+                  <div className="px-5 py-3.5 text-[#a1a1aa] flex items-start gap-2">
+                    <svg className="w-3.5 h-3.5 text-[#38bdf8] shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                    {bubble}
+                  </div>
+                </div>
+              ))}
             </div>
-
-            <div className="space-y-2 border-t border-white/[0.06] pt-4">
-              <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/25">
-                <span className="text-xs font-semibold text-emerald-300">Bubble Chat</span>
-                <span className="text-[11px] font-medium text-emerald-200">No Signup • 0 Storage</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <span className="text-xs text-slate-400">WhatsApp</span>
-                <span className="text-[11px] text-slate-500">Phone Req • Metadata Logs</span>
-              </div>
-              <div className="flex items-center justify-between p-2 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <span className="text-xs text-slate-400">Telegram</span>
-                <span className="text-[11px] text-slate-500">Account Req • Cloud Stored</span>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
       </section>
 
-      {/* How It Works Section */}
-      <section
-        id="how-it-works"
-        aria-label="How Bubble Chat works"
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 w-full"
-      >
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">
-            Three Simple Steps
+      {/* ─── FAQ ──────────────────────────────────────────────────── */}
+      <section id="faq" className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 py-20 w-full">
+        <div className="text-center mb-10">
+          <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#38bdf8] px-2.5 py-1 rounded bg-[#141419] border border-[#26262e]">
+            FAQ
           </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            How Bubble works
-          </h2>
-          <p className="mt-2 text-sm text-slate-400">
-            No downloads or email confirmations. Connect with anyone in seconds.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              step: "01",
-              title: "Pick Any Handle",
-              desc: "Choose any nickname you like. No passwords, credentials, or phone numbers needed.",
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              ),
-            },
-            {
-              step: "02",
-              title: "Create or Join Room",
-              desc: "Enter a secret room name and share it with your friend. Both join the same room name.",
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-                </svg>
-              ),
-            },
-            {
-              step: "03",
-              title: "Chat & Vanish",
-              desc: "Exchange live encrypted-feeling messages. When everyone leaves, all messages vanish forever.",
-              icon: (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 12h20" />
-                  <path d="M20 12l-4-4" />
-                  <path d="M20 12l-4 4" />
-                </svg>
-              ),
-            },
-          ].map((s) => (
-            <div
-              key={s.step}
-              className="glass-panel glass-panel-hover rounded-3xl p-6 flex flex-col items-start text-left relative overflow-hidden"
-            >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4">
-                {s.icon}
-              </div>
-              <span className="text-[11px] font-bold text-emerald-400 tracking-wider mb-1">
-                STEP {s.step}
-              </span>
-              <h3 className="text-base font-bold text-white mb-2">{s.title}</h3>
-              <p className="text-xs text-slate-400 leading-relaxed">{s.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section
-        id="faq"
-        aria-label="Frequently asked questions"
-        className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 py-16 w-full"
-      >
-        <div className="text-center max-w-xl mx-auto mb-10">
-          <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">
-            Got Questions?
-          </span>
-          <h2 className="mt-2 text-2xl sm:text-3xl font-bold text-white tracking-tight">
-            Frequently Asked Questions
+          <h2 className="mt-4 text-2xl sm:text-3xl font-bold text-white font-heading">
+            Common questions
           </h2>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           {faqs.map((faq) => (
             <details
               key={faq.q}
-              className="group glass-panel rounded-2xl p-5 cursor-pointer border border-white/[0.06] hover:border-emerald-500/30 transition-all duration-200"
+              className="group bg-[#121216] rounded-xl border border-[#26262e] hover:border-[#383845] transition-colors"
             >
-              <summary className="text-white font-medium text-sm sm:text-base list-none flex justify-between items-center gap-4">
-                <span>{faq.q}</span>
-                <div className="w-6 h-6 rounded-full bg-white/[0.05] flex items-center justify-center text-emerald-400 group-open:rotate-45 group-open:bg-emerald-500/20 transition-all duration-200 shrink-0">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
+              <summary className="text-white font-medium text-sm list-none flex justify-between items-center gap-4 px-5 py-4 cursor-pointer">
+                <span className="font-heading">{faq.q}</span>
+                <div className="w-6 h-6 rounded bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#e10098] group-open:rotate-45 transition-transform duration-200 shrink-0">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <line x1="12" y1="5" x2="12" y2="19" />
                     <line x1="5" y1="12" x2="19" y2="12" />
                   </svg>
                 </div>
               </summary>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed mt-3 pt-3 border-t border-white/[0.05]">
+              <p className="text-sm text-[#a1a1aa] leading-relaxed px-5 pb-4 pt-2 border-t border-[#1e1e26]">
                 {faq.a}
               </p>
             </details>
           ))}
         </div>
+      </section>
 
-        {/* Action Banner */}
-        <div className="mt-14 glass-panel rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden border-emerald-500/20 bg-gradient-to-b from-emerald-500/[0.07] to-transparent">
-          <h3 className="text-2xl font-bold text-white">Ready for private conversations?</h3>
-          <p className="text-sm text-slate-400 max-w-md mx-auto mt-2 mb-6">
-            Jump into a real-time room right now with zero friction.
+      {/* ─── FINAL CTA ────────────────────────────────────────────── */}
+      <section className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pb-24 w-full">
+        <div className="bg-[#121216] border border-[#26262e] rounded-2xl px-8 py-12 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white font-heading">
+            Ready to talk privately?
+          </h2>
+          <p className="mt-3 text-sm text-[#a1a1aa] max-w-sm mx-auto leading-relaxed">
+            No signup required. Create a room in seconds and share the name with whoever you want to chat with.
           </p>
-          <Button1 text="Create a Room Now" />
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="/create"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors"
+            >
+              Create a room
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14" /><path d="M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+            <Link
+              href="https://github.com/Yvuraj001/Bubble-Chat"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#181820] hover:bg-[#20202a] border border-[#26262e] transition-colors"
+            >
+              <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+              </svg>
+              View on GitHub
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Footer */}
       <Footer />
     </div>
   );

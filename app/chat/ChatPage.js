@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef, Suspense } from "react";
+import { useEffect, useState, useRef } from "react";
 import useSocket from "../hook/socket";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
@@ -246,15 +246,15 @@ const Page = () => {
   }, [showError]);
 
   return (
-    <div className="relative h-full flex flex-col flex-1 bg-[#070a12] text-slate-100 font-sans overflow-hidden">
+    <div className="relative h-full flex flex-col flex-1 bg-[#0b0b0e] text-white font-sans overflow-hidden">
       {/* Connection error overlay */}
       {showError && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md px-4">
-          <div className="glass-panel border-red-500/30 bg-[#160b0e]/95 text-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
-            <div className="w-14 h-14 rounded-2xl bg-red-500/20 border border-red-500/40 flex items-center justify-center mx-auto mb-4 text-red-400">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4">
+          <div className="border border-[#e10098]/40 bg-[#141419] text-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
+            <div className="w-12 h-12 rounded-xl bg-[#1f1620] border border-[#e10098]/40 flex items-center justify-center mx-auto mb-4 text-[#e10098]">
               <svg
-                width="28"
-                height="28"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -267,44 +267,44 @@ const Page = () => {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-white mb-1">Server Offline</h3>
-            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+            <h3 className="text-lg font-bold text-white mb-1 font-heading">Server Offline</h3>
+            <p className="text-xs text-[#a1a1aa] leading-relaxed mb-4">
               Unable to reach the WebSocket gateway. Redirecting to home...
             </p>
-            <div className="w-6 h-6 border-2 border-red-400 border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-5 h-5 border-2 border-[#e10098] border-t-transparent rounded-full animate-spin mx-auto" />
           </div>
         </div>
       )}
 
       {/* Chat Header Bar */}
-      <div className="relative z-20 flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-white/[0.08] bg-[#090d16]/90 backdrop-blur-xl">
+      <div className="relative z-20 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-[#26262e] bg-[#0e0e12]">
         {/* Left: User & Room Info */}
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-sm font-bold text-slate-950 uppercase shadow-md shadow-emerald-500/20 shrink-0">
+          <div className="w-9 h-9 rounded-lg bg-[#e10098] flex items-center justify-center text-sm font-bold text-white uppercase shrink-0 font-heading">
             {Sender?.[0] || "?"}
           </div>
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-white tracking-tight">
+              <span className="text-sm font-bold text-white tracking-tight font-heading">
                 {Sender || "Anonymous"}
               </span>
-              <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              <span className="text-[10px] font-mono uppercase font-semibold px-1.5 py-0.2 rounded bg-[#181820] text-[#38bdf8] border border-[#26262f]">
                 You
               </span>
             </div>
-            <div className="flex items-center gap-1.5 text-xs text-slate-400">
+            <div className="flex items-center gap-1.5 text-xs text-[#71717a]">
               <span>Room:</span>
-              <span className="font-mono font-bold text-emerald-400">{roomName || "..."}</span>
+              <span className="font-mono font-semibold text-white">{roomName || "..."}</span>
             </div>
           </div>
         </div>
 
         {/* Right: Room Status, Link Share & Leave */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           {/* Active members pill */}
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.06] text-xs">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-slate-300 font-medium">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141419] border border-[#26262e] text-xs font-mono">
+            <span className="w-2 h-2 rounded-full bg-[#38bdf8]"></span>
+            <span className="text-[#a1a1aa] font-medium">
               {Count > 1 ? `${Count} active in room` : "Waiting for peer..."}
             </span>
           </div>
@@ -313,15 +313,15 @@ const Page = () => {
           <button
             type="button"
             onClick={handleCopyLink}
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-medium text-slate-300 hover:text-white transition-all cursor-pointer"
+            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141419] hover:bg-[#1c1c24] border border-[#26262e] text-xs font-mono font-medium text-[#a1a1aa] hover:text-white transition-colors cursor-pointer"
             title="Copy invite link"
           >
             {copied ? (
               <>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-emerald-400">Link Copied!</span>
+                <span className="text-[#38bdf8]">Link Copied!</span>
               </>
             ) : (
               <>
@@ -337,7 +337,7 @@ const Page = () => {
           {/* Leave Room CTA */}
           <Link
             href="/create"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 hover:text-rose-200 text-xs font-semibold transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181820] hover:bg-[#20202a] border border-[#26262f] text-[#a1a1aa] hover:text-white text-xs font-mono font-semibold transition-colors cursor-pointer"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -352,25 +352,25 @@ const Page = () => {
       {/* Messages Stream Container */}
       <div
         ref={messageContainerRef}
-        className="relative z-10 flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-4 overflow-x-hidden bg-[radial-gradient(#10b98108_1px,transparent_1px)] [background-size:16px_16px]"
+        className="relative z-10 flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-4 overflow-x-hidden bg-[#0b0b0e]"
       >
         {/* Empty State */}
         {messages.length === 0 && showMessagesToNewUser.length < 1 && (
           <div className="flex flex-col items-center justify-center h-full max-w-sm mx-auto text-center px-4 py-12 select-none">
-            <div className="w-16 h-16 rounded-3xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/5">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+            <div className="w-14 h-14 rounded-2xl bg-[#141419] border border-[#26262e] text-[#e10098] flex items-center justify-center mb-4">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                 <path d="M8 10h.01" strokeWidth="3" />
                 <path d="M12 10h.01" strokeWidth="3" />
                 <path d="M16 10h.01" strokeWidth="3" />
               </svg>
             </div>
-            <h3 className="text-base font-bold text-white mb-1">Room Created: {roomName}</h3>
-            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+            <h3 className="text-base font-bold text-white mb-1 font-heading">Room Created: {roomName}</h3>
+            <p className="text-xs text-[#a1a1aa] leading-relaxed mb-4">
               Share the room code or URL with your friend. Messages will appear here in real time.
             </p>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] text-slate-400 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141419] border border-[#26262e] text-[11px] text-[#71717a] font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]"></span>
               <span>Room names are case-sensitive</span>
             </div>
           </div>
@@ -380,39 +380,39 @@ const Page = () => {
         {showMessagesToNewUser.length > 0 && (
           <div className={`flex flex-col gap-4 mb-6 ${isnewUser ? "" : "hidden"}`}>
             <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 h-px bg-white/[0.08]" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-slate-500 px-2">
+              <div className="flex-1 h-px bg-[#26262e]" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#71717a] px-2">
                 Earlier Messages
               </span>
-              <div className="flex-1 h-px bg-white/[0.08]" />
+              <div className="flex-1 h-px bg-[#26262e]" />
             </div>
 
             {showMessagesToNewUser.map((msg, i) => {
               const isMe = msg.sender === Sender;
               return (
                 <div key={i} className={`flex flex-col gap-1 ${isMe ? "items-end" : "items-start"}`}>
-                  <span className="text-[11px] font-medium text-slate-400 px-1">
+                  <span className="text-[11px] font-mono font-medium text-[#71717a] px-1">
                     {isMe ? "You" : msg.sender || "Anonymous"}
                   </span>
 
                   {msg.replyTo && (
-                    <div className="max-w-[75%] sm:max-w-md bg-white/[0.03] border-l-2 border-emerald-400 px-3 py-1.5 rounded-r-xl text-xs text-slate-400 mb-1">
-                      <span className="font-semibold text-emerald-300 block text-[10px]">{msg.replyTo.sender}</span>
+                    <div className="max-w-[75%] sm:max-w-md bg-[#141419] border-l-2 border-[#38bdf8] px-3 py-1.5 rounded-r-lg text-xs text-[#a1a1aa] mb-1">
+                      <span className="font-mono font-semibold text-[#38bdf8] block text-[10px]">{msg.replyTo.sender}</span>
                       <span className="truncate block opacity-80">{msg.replyTo.text}</span>
                     </div>
                   )}
 
                   <div
-                    className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed shadow-md break-words ${
+                    className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-xl text-sm leading-relaxed break-words ${
                       isMe
-                        ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-medium rounded-br-xs"
-                        : "glass-panel bg-[#111726]/90 text-slate-100 rounded-bl-xs border border-white/10"
+                        ? "bg-[#e10098] text-white font-medium"
+                        : "bg-[#181820] text-white border border-[#26262f]"
                     }`}
                   >
                     {msg.text}
                   </div>
 
-                  <div className="flex items-center gap-2 px-1 text-[10px] text-slate-500">
+                  <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#71717a]">
                     <span>{msg.time || "00:00"}</span>
                     <span>•</span>
                     <button
@@ -421,7 +421,7 @@ const Page = () => {
                         setreplyTo(msg);
                         inputRef.current?.focus();
                       }}
-                      className="text-emerald-400/80 hover:text-emerald-300 font-medium cursor-pointer transition-colors"
+                      className="text-[#38bdf8] hover:text-[#0ea5e9] font-medium cursor-pointer transition-colors"
                     >
                       Reply
                     </button>
@@ -431,11 +431,11 @@ const Page = () => {
             })}
 
             <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent to-emerald-500/30" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-emerald-400 px-2">
+              <div className="flex-1 h-px bg-[#26262e]" />
+              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#38bdf8] px-2">
                 Live Conversation
               </span>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent to-emerald-500/30" />
+              <div className="flex-1 h-px bg-[#26262e]" />
             </div>
           </div>
         )}
@@ -445,14 +445,14 @@ const Page = () => {
           const isMe = msg.type === "sent";
           return (
             <div key={i} className={`flex flex-col gap-1 ${isMe ? "items-end" : "items-start"}`}>
-              <span className="text-[11px] font-medium text-slate-400 px-1">
+              <span className="text-[11px] font-mono font-medium text-[#71717a] px-1">
                 {isMe ? "You" : msg.sender || "Anonymous"}
               </span>
 
               {/* Reply Quote Banner */}
               {msg.replyTo && (
-                <div className="max-w-[75%] sm:max-w-md bg-white/[0.04] border-l-2 border-emerald-400 px-3 py-1.5 rounded-r-xl text-xs text-slate-400 mb-1 backdrop-blur-sm">
-                  <span className="font-semibold text-emerald-300 block text-[10px]">
+                <div className="max-w-[75%] sm:max-w-md bg-[#141419] border-l-2 border-[#38bdf8] px-3 py-1.5 rounded-r-lg text-xs text-[#a1a1aa] mb-1">
+                  <span className="font-mono font-semibold text-[#38bdf8] block text-[10px]">
                     Replying to {msg.replyTo.sender}
                   </span>
                   <span className="truncate block opacity-80">{msg.replyTo.text}</span>
@@ -461,17 +461,17 @@ const Page = () => {
 
               {/* Message Bubble */}
               <div
-                className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-2xl text-sm leading-relaxed shadow-lg break-words ${
+                className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-xl text-sm leading-relaxed break-words ${
                   isMe
-                    ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-medium rounded-br-xs"
-                    : "glass-panel bg-[#111726]/90 text-slate-100 rounded-bl-xs border border-white/10"
+                    ? "bg-[#e10098] text-white font-medium"
+                    : "bg-[#181820] text-white border border-[#26262f]"
                 }`}
               >
                 {msg.text}
               </div>
 
               {/* Actions & Timestamp */}
-              <div className="flex items-center gap-2 px-1 text-[10px] text-slate-500">
+              <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#71717a]">
                 <span>{msg.time || "00:00"}</span>
                 <span>•</span>
                 <button
@@ -480,7 +480,7 @@ const Page = () => {
                     setreplyTo(msg);
                     inputRef.current?.focus();
                   }}
-                  className="text-emerald-400/80 hover:text-emerald-300 font-medium cursor-pointer transition-colors"
+                  className="text-[#38bdf8] hover:text-[#0ea5e9] font-medium cursor-pointer transition-colors"
                 >
                   Reply
                 </button>
@@ -492,23 +492,23 @@ const Page = () => {
 
       {/* Floating Reply Preview Bar */}
       {replyTo && (
-        <div className="relative z-20 mx-4 sm:mx-6 mb-2 p-3 rounded-2xl glass-panel border border-emerald-500/30 bg-[#0d1522]/95 backdrop-blur-xl flex items-center justify-between gap-3 shadow-xl">
+        <div className="relative z-20 mx-4 sm:mx-6 mb-2 p-3 rounded-xl border border-[#26262e] bg-[#141419] flex items-center justify-between gap-3 shadow-xl">
           <div className="flex items-center gap-3 overflow-hidden min-w-0">
-            <div className="w-1 h-8 rounded-full bg-emerald-400 shrink-0" />
+            <div className="w-1 h-7 rounded-full bg-[#38bdf8] shrink-0" />
             <div className="overflow-hidden">
-              <span className="text-[11px] font-bold text-emerald-400 block tracking-wide">
+              <span className="text-[11px] font-mono font-bold text-[#38bdf8] block tracking-wide">
                 Replying to {replyTo.sender}
               </span>
-              <p className="text-xs text-slate-300 truncate">{replyTo.text}</p>
+              <p className="text-xs text-[#a1a1aa] truncate">{replyTo.text}</p>
             </div>
           </div>
           <button
             type="button"
             onClick={() => setreplyTo(null)}
-            className="w-7 h-7 rounded-xl bg-white/[0.06] hover:bg-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors shrink-0"
+            className="w-6 h-6 rounded-md bg-[#202028] hover:bg-[#2a2a35] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-colors shrink-0 cursor-pointer"
             title="Cancel reply"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -517,7 +517,7 @@ const Page = () => {
       )}
 
       {/* Message Input Form */}
-      <div className="relative z-20 p-4 sm:px-6 border-t border-white/[0.08] bg-[#090d16]/95 backdrop-blur-xl">
+      <div className="relative z-20 p-3.5 sm:px-6 border-t border-[#26262e] bg-[#0e0e12]">
         <form onSubmit={handlesubmit} className="max-w-7xl mx-auto flex items-center gap-3">
           <input
             type="text"
@@ -543,14 +543,14 @@ const Page = () => {
               value={message}
               onChange={(e) => setmessage(e.target.value)}
               onPaste={handlePaste}
-              className="w-full px-5 py-3.5 rounded-2xl text-sm text-white placeholder-slate-500 bg-white/[0.04] border border-white/10 outline-none focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-emerald-400/20 transition-all duration-200"
+              className="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#16161c] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
             />
           </div>
 
           <button
             type="submit"
             disabled={!message.trim()}
-            className="w-12 h-12 rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 font-bold flex items-center justify-center shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.03] active:scale-[0.97] transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none disabled:shadow-none cursor-pointer shrink-0"
+            className="w-11 h-11 rounded-lg bg-[#e10098] hover:bg-[#c90087] text-white font-bold flex items-center justify-center transition-colors disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0 font-mono"
             aria-label="Send message"
           >
             <svg

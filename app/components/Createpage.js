@@ -54,26 +54,22 @@ const Create = () => {
   }, []);
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-[#070a12] overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr from-emerald-500/10 via-teal-500/5 to-transparent rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-
+    <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12 bg-[#0b0b0e]">
       <div className="relative z-10 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         {/* Left Side: Creation Card */}
-        <div className="lg:col-span-7 glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 shadow-2xl shadow-black/60 relative overflow-hidden">
-          {/* Top highlight strip */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500" />
+        <div className="lg:col-span-7 bg-[#131317] rounded-2xl p-6 sm:p-10 border border-[#26262f] shadow-xl relative overflow-hidden">
+          {/* Top highlight strip in solid accent color */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#e10098]" />
 
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+            <div className="w-10 h-10 rounded-lg bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#e10098]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-white tracking-tight">Create or Join Room</h1>
-              <p className="text-xs text-slate-400">Instant temporary connection • Zero setup</p>
+              <h1 className="text-2xl font-bold text-white tracking-tight font-heading">Create or Join Room</h1>
+              <p className="text-xs font-mono text-[#71717a]">Instant temporary connection • Zero setup</p>
             </div>
           </div>
 
@@ -82,12 +78,12 @@ const Create = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2"
+                className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a1aa] mb-2"
               >
                 Your Display Name
               </label>
               <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                <div className="absolute left-3.5 text-[#71717a] pointer-events-none">
                   <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <circle cx="12" cy="8" r="4" />
                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
@@ -101,7 +97,7 @@ const Create = () => {
                   required
                   value={name}
                   onChange={handlenameChange}
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl text-sm text-white placeholder-slate-500 bg-white/[0.04] border border-white/10 outline-none focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-emerald-400/20 transition-all duration-200"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
                 />
               </div>
             </div>
@@ -111,14 +107,14 @@ const Create = () => {
               <div className="flex items-center justify-between mb-2">
                 <label
                   htmlFor="RoomName"
-                  className="block text-xs font-semibold uppercase tracking-wider text-slate-300"
+                  className="block text-xs font-mono font-semibold uppercase tracking-wider text-[#a1a1aa]"
                 >
                   Room Name or Code
                 </label>
                 <button
                   type="button"
                   onClick={generateRandomRoom}
-                  className="text-[11px] font-medium text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors"
+                  className="text-[11px] font-mono font-medium text-[#38bdf8] hover:text-[#0ea5e9] flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" />
@@ -128,7 +124,7 @@ const Create = () => {
               </div>
 
               <div className="relative flex items-center">
-                <div className="absolute left-3.5 text-slate-400 pointer-events-none">
+                <div className="absolute left-3.5 text-[#71717a] pointer-events-none">
                   <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                     <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -142,10 +138,10 @@ const Create = () => {
                   required
                   value={roomName}
                   onChange={handleroomChange}
-                  className="w-full pl-11 pr-4 py-3 rounded-2xl text-sm text-white placeholder-slate-500 bg-white/[0.04] border border-white/10 outline-none focus:border-emerald-400/60 focus:bg-white/[0.06] focus:ring-2 focus:ring-emerald-400/20 transition-all duration-200"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
                 />
               </div>
-              <p className="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
+              <p className="text-[11px] font-mono text-[#71717a] mt-1.5 flex items-center gap-1">
                 <span>Tip: Share this exact name with anyone you want in the room.</span>
               </p>
             </div>
@@ -156,9 +152,9 @@ const Create = () => {
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleOnChange}
-                className="w-4 h-4 rounded accent-emerald-500 cursor-pointer bg-white/10 border-white/20"
+                className="w-4 h-4 rounded accent-[#e10098] cursor-pointer bg-[#181820] border-[#26262f]"
               />
-              <span className="text-xs text-slate-300">
+              <span className="text-xs text-[#a1a1aa]">
                 Remember my details locally on this device
               </span>
             </label>
@@ -166,7 +162,7 @@ const Create = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full mt-3 py-3.5 px-6 rounded-2xl font-bold text-sm text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full mt-3 py-3 px-6 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Enter Chat Room</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -178,28 +174,28 @@ const Create = () => {
         </div>
 
         {/* Right Side: Information & Visual Card */}
-        <div className="lg:col-span-5 flex flex-col gap-5">
+        <div className="lg:col-span-5 flex flex-col gap-4">
           {/* Quick instructions card */}
-          <div className="glass-panel rounded-3xl p-6 sm:p-7 border border-white/10 bg-gradient-to-b from-white/[0.04] to-transparent">
-            <h2 className="text-base font-bold text-white mb-3 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <div className="bg-[#131317] rounded-2xl p-6 sm:p-7 border border-[#26262f]">
+            <h2 className="text-base font-bold text-white mb-3 flex items-center gap-2 font-heading">
+              <span className="w-2 h-2 rounded-full bg-[#38bdf8]"></span>
               <span>How Joining Works</span>
             </h2>
-            <div className="space-y-3.5 text-xs text-slate-400 leading-relaxed">
+            <div className="space-y-3 text-xs text-[#a1a1aa] leading-relaxed">
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded bg-[#181820] border border-[#26262f] text-[#38bdf8] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[11px]">
                   1
                 </div>
                 <p>Type any room name of your choice.</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded bg-[#181820] border border-[#26262f] text-[#38bdf8] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[11px]">
                   2
                 </div>
                 <p>Send that room name or URL to your contact.</p>
               </div>
               <div className="flex items-start gap-3">
-                <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <div className="w-5 h-5 rounded bg-[#181820] border border-[#26262f] text-[#38bdf8] font-mono font-bold flex items-center justify-center shrink-0 mt-0.5 text-[11px]">
                   3
                 </div>
                 <p>Chat simultaneously. Close the tab to destroy history.</p>
@@ -208,16 +204,16 @@ const Create = () => {
           </div>
 
           {/* Privacy Guarantee Card */}
-          <div className="glass-panel rounded-3xl p-6 border border-emerald-500/20 bg-emerald-500/[0.04]">
+          <div className="bg-[#131317] rounded-2xl p-6 border border-[#26262f]">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <div className="w-7 h-7 rounded-lg bg-[#181820] border border-[#26262f] text-[#e10098] flex items-center justify-center">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <h3 className="text-sm font-bold text-white">Privacy Guarantee</h3>
+              <h3 className="text-sm font-bold text-white font-heading">Privacy Guarantee</h3>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-[#a1a1aa] leading-relaxed">
               No server-side databases log your conversation. Once all users disconnect, memory buffers are immediately purged.
             </p>
           </div>

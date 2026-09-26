@@ -12,7 +12,7 @@ export const metadata = {
 
 const Page = () => {
   return (
-    <div className="flex flex-col min-h-full flex-1 bg-[#070a12]">
+    <div className="flex flex-col min-h-screen bg-[#0b0b0e]">
       <About />
       <Footer />
     </div>

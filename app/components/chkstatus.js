@@ -1,20 +1,15 @@
- 
-
 const chkstatus = async () => {
-    let isactive ;
-    
-    let a = await fetch(process.env.NEXT_PUBLIC_POST_URL, { method: "POST", headers: { "Content-Type": "application/json" } })
-        let res = await a.text()
-       
-      
-       if(res){
-        return isactive = true
-        
-    }
-    else{
-        return isactive = false
-    }
-   
-}
+  try {
+    const response = await fetch(process.env.NEXT_PUBLIC_POST_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+    });
 
-export default chkstatus
+    return response.ok;
+  } catch (e) {
+    console.log("Server is not running", e.message);
+    return false;
+  }
+};
+
+export default chkstatus;
