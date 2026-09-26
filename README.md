@@ -8,11 +8,8 @@ A real-time chat application built with Next.js and Socket.IO.
 Demo : https://bubble-chat-nine.vercel.app/
   
 ### Home Page 
-<img width="1710" height="954" alt="image" src="https://github.com/user-attachments/assets/0f0bf9a5-71d6-47b8-af64-32b799bcbf14" />
+<img width="1710" height="1112" alt="image" src="https://github.com/user-attachments/assets/4e31e044-51a1-44e5-bc32-fac1dc13a69c" />
 
-
-### Chat Page
-<img width="1710" height="952" alt="image" src="https://github.com/user-attachments/assets/2ee84d4b-fe48-4210-9e07-89b6b1393024" />
 
 
 
