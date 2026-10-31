@@ -2,13 +2,12 @@
 
 A real-time chat application built with Next.js and Socket.IO.
 
-(of course ui is made up by ai because my main proirity while making this was to learn how socket works and some basic about messanging. so i built ui with ai)
-
 ---
 Demo : https://bubble-chat-nine.vercel.app/
   
 ### Home Page 
-<img width="1710" height="1112" alt="image" src="https://github.com/user-attachments/assets/4e31e044-51a1-44e5-bc32-fac1dc13a69c" />
+<img width="1707" height="1012" alt="image" src="https://github.com/user-attachments/assets/3a4d435e-4f39-432b-b72e-947f3b5ab328" />
+
 
 
 
