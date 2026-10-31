@@ -7,59 +7,34 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "FAQ", href: "/faq" },
-    { name: "Privacy", href: "/privacy" },
-  ];
+  if (pathname?.startsWith("/chat")) return null;
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0e0e12] border-b border-[#26262e]">
+    <header className="sticky top-0 z-40 w-full border-b border-[#e2e8f0] bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto h-16 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Logo - Removed 'Ephemeral' badge */}
         <Link href="/" className="flex items-center gap-2.5 group focus:outline-none">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#18181f] border border-[#2e2e3a] group-hover:border-[#e10098] transition-colors">
+          <div className="flex items-center justify-center w-8 h-8 rounded-sm bg-white border border-[#e2e8f0] group-hover:border-[#0284c7] transition-colors">
             <svg
               width="17"
               height="17"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="#e10098"
+              stroke="#0284c7"
               strokeWidth="2.2"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-              <circle cx="9" cy="10" r="1" fill="#e10098" />
-              <circle cx="12" cy="10" r="1" fill="#e10098" />
-              <circle cx="15" cy="10" r="1" fill="#e10098" />
+              <circle cx="9" cy="10" r="1" fill="#0284c7" />
+              <circle cx="12" cy="10" r="1" fill="#0284c7" />
+              <circle cx="15" cy="10" r="1" fill="#0284c7" />
             </svg>
           </div>
-          <span className="font-bold text-base tracking-tight text-white font-heading">
-            bubble<span className="text-[#e10098]">.</span>
+          <span className="font-bold text-base tracking-tight text-[#0f172a] font-heading">
+            bubble<span className="text-[#0284c7]">.</span>
           </span>
         </Link>
-
-        {/* Navigation Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#141419] border border-[#26262e] rounded-lg p-1">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                className={`text-xs font-mono font-medium px-3.5 py-1.5 rounded-md transition-colors ${
-                  isActive
-                    ? "text-white bg-[#22222b] font-semibold"
-                    : "text-[#a1a1aa] hover:text-white hover:bg-[#1a1a22]"
-                }`}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-        </nav>
 
         {/* Right CTA / GitHub button */}
         <div className="flex items-center gap-2.5">
@@ -68,7 +43,7 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub repository"
-            className="p-2 rounded-lg text-[#a1a1aa] hover:text-white bg-[#141419] hover:bg-[#1a1a22] border border-[#26262e] transition-colors"
+            className="rounded-sm border border-[#e2e8f0] bg-white p-2 text-[#64748b] transition-colors hover:bg-[#f1f5f9] hover:text-[#0f172a]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,10 +57,10 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href="/create"
-            className="inline-flex items-center gap-2 text-xs font-mono font-semibold px-4 py-2 rounded-lg bg-[#e10098] hover:bg-[#c90087] text-white transition-colors"
+            href="/#start"
+            className="inline-flex items-center gap-2 rounded-sm bg-[#4f46e5] px-4 py-2 text-xs font-mono font-semibold text-white transition-colors hover:bg-[#4338ca]"
           >
-            <span>Create Room</span>
+            <span>Start chatting</span>
             <svg
               width="14"
               height="14"

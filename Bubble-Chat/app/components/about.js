@@ -18,7 +18,7 @@ const About = () => {
             Open Source Ephemeral Messaging
           </div>
           <h1 className="text-3xl sm:text-5xl font-bold text-white tracking-tight max-w-2xl leading-tight font-heading">
-            Chat freely without the <span className="text-[#e10098]">digital baggage</span>
+            Chat freely without the <span className="text-[#38bdf8]">digital baggage</span>
           </h1>
           <p className="text-sm sm:text-base text-[#a1a1aa] max-w-2xl leading-relaxed">
             Bubble is built for conversations that matter in the moment. No phone numbers, no tracking cookies, and no database archives.
@@ -28,7 +28,7 @@ const About = () => {
         {/* What is Bubble Card */}
         <div className="bg-[#131317] rounded-2xl p-6 sm:p-10 border border-[#26262f]">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#e10098]">
+            <div className="w-10 h-10 rounded-lg bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#38bdf8]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="16" x2="12" y2="12" />
@@ -61,7 +61,7 @@ const About = () => {
         {/* How It Works Steps */}
         <div>
           <div className="text-center max-w-md mx-auto mb-8">
-            <span className="text-xs uppercase font-mono font-bold tracking-widest text-[#e10098] px-2.5 py-1 rounded bg-[#141419] border border-[#26262e]">
+            <span className="text-xs uppercase font-mono font-bold tracking-widest text-[#38bdf8] px-2.5 py-1 rounded bg-[#141419] border border-[#26262e]">
               Workflow
             </span>
             <h2 className="text-2xl font-bold text-white mt-3 font-heading">How it operates</h2>
@@ -93,7 +93,7 @@ const About = () => {
               <div key={tech.name} className="bg-[#181820] border border-[#26262f] rounded-xl p-4 flex flex-col justify-between">
                 <div>
                   <span className="text-sm font-bold text-white font-heading">{tech.name}</span>
-                  <span className="text-[11px] font-mono text-[#e10098] block font-medium mt-0.5">{tech.role}</span>
+                  <span className="text-[11px] font-mono text-[#38bdf8] block font-medium mt-0.5">{tech.role}</span>
                 </div>
                 <p className="text-[11px] text-[#71717a] mt-2">{tech.desc}</p>
               </div>
@@ -105,7 +105,7 @@ const About = () => {
         <div className="text-center pt-2 pb-6">
           <button
             onClick={() => router.push('/')}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#38bdf8] hover:bg-[#0ea5e9] transition-colors cursor-pointer"
           >
             <span>Back to Home</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

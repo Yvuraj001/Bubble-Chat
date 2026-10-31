@@ -59,10 +59,10 @@ const Create = () => {
         {/* Left Side: Creation Card */}
         <div className="lg:col-span-7 bg-[#131317] rounded-2xl p-6 sm:p-10 border border-[#26262f] shadow-xl relative overflow-hidden">
           {/* Top highlight strip in solid accent color */}
-          <div className="absolute top-0 left-0 right-0 h-1 bg-[#e10098]" />
+          <div className="absolute top-0 left-0 right-0 h-1 bg-[#38bdf8]" />
 
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-lg bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#e10098]">
+            <div className="w-10 h-10 rounded-lg bg-[#181820] border border-[#2a2a38] flex items-center justify-center text-[#38bdf8]">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
               </svg>
@@ -97,7 +97,7 @@ const Create = () => {
                   required
                   value={name}
                   onChange={handlenameChange}
-                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#38bdf8] transition-colors"
                 />
               </div>
             </div>
@@ -138,7 +138,7 @@ const Create = () => {
                   required
                   value={roomName}
                   onChange={handleroomChange}
-                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#181820] border border-[#26262f] outline-none focus:border-[#38bdf8] transition-colors"
                 />
               </div>
               <p className="text-[11px] font-mono text-[#71717a] mt-1.5 flex items-center gap-1">
@@ -152,7 +152,7 @@ const Create = () => {
                 type="checkbox"
                 checked={isChecked}
                 onChange={handleOnChange}
-                className="w-4 h-4 rounded accent-[#e10098] cursor-pointer bg-[#181820] border-[#26262f]"
+                className="w-4 h-4 rounded accent-[#38bdf8] cursor-pointer bg-[#181820] border-[#26262f]"
               />
               <span className="text-xs text-[#a1a1aa]">
                 Remember my details locally on this device
@@ -162,7 +162,7 @@ const Create = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full mt-3 py-3 px-6 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full mt-3 py-3 px-6 rounded-lg font-mono font-semibold text-sm text-white bg-[#38bdf8] hover:bg-[#0ea5e9] transition-colors flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Enter Chat Room</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -206,7 +206,7 @@ const Create = () => {
           {/* Privacy Guarantee Card */}
           <div className="bg-[#131317] rounded-2xl p-6 border border-[#26262f]">
             <div className="flex items-center gap-3 mb-2">
-              <div className="w-7 h-7 rounded-lg bg-[#181820] border border-[#26262f] text-[#e10098] flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-[#181820] border border-[#26262f] text-[#38bdf8] flex items-center justify-center">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>

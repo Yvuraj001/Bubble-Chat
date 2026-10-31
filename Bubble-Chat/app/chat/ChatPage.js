@@ -77,7 +77,7 @@ const Page = () => {
     const paramroomName = decodeURI(searchParams.get("room") || "");
 
     if (!paramName || !paramroomName || paramName === "null" || paramroomName === "null") {
-      router.push("/create");
+      router.push("/");
       return;
     } else {
       setroomName(paramroomName);
@@ -176,7 +176,7 @@ const Page = () => {
 
   const handleCopyLink = () => {
     if (typeof window !== "undefined") {
-      const url = `${window.location.origin}/create?room=${encodeURIComponent(roomName)}`;
+      const url = `${window.location.origin}/?room=${encodeURIComponent(roomName)}`;
       navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -246,12 +246,12 @@ const Page = () => {
   }, [showError]);
 
   return (
-    <div className="relative h-full flex flex-col flex-1 bg-[#0b0b0e] text-white font-sans overflow-hidden">
+    <div className="relative flex h-full flex-1 flex-col overflow-hidden bg-[radial-gradient(circle_at_top_left,_#fef3c7,_transparent_30%),radial-gradient(circle_at_bottom_right,_#ddd6fe,_transparent_40%),#f8fafc] font-sans text-[#0f172a]">
       {/* Connection error overlay */}
       {showError && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 px-4">
-          <div className="border border-[#e10098]/40 bg-[#141419] text-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl">
-            <div className="w-12 h-12 rounded-xl bg-[#1f1620] border border-[#e10098]/40 flex items-center justify-center mx-auto mb-4 text-[#e10098]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f172a]/20 px-4 backdrop-blur-sm">
+          <div className="w-full max-w-sm rounded-2xl border border-[#e2e8f0] bg-white p-8 text-center shadow-xl">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#ede9fe] text-[#4f46e5]">
               <svg
                 width="24"
                 height="24"
@@ -267,44 +267,39 @@ const Page = () => {
                 <line x1="12" y1="16" x2="12.01" y2="16" />
               </svg>
             </div>
-            <h3 className="text-lg font-bold text-white mb-1 font-heading">Server Offline</h3>
-            <p className="text-xs text-[#a1a1aa] leading-relaxed mb-4">
+            <h3 className="mb-1 text-lg font-bold text-[#0f172a] font-heading">Server Offline</h3>
+            <p className="mb-4 text-xs leading-relaxed text-[#64748b]">
               Unable to reach the WebSocket gateway. Redirecting to home...
             </p>
-            <div className="w-5 h-5 border-2 border-[#e10098] border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="mx-auto h-5 w-5 animate-spin rounded-full border-2 border-[#4f46e5] border-t-transparent" />
           </div>
         </div>
       )}
 
       {/* Chat Header Bar */}
-      <div className="relative z-20 flex items-center justify-between px-4 sm:px-6 py-3 border-b border-[#26262e] bg-[#0e0e12]">
+      <div className="relative z-20 border-b border-[#e2e8f0] bg-white px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-5xl items-center justify-between">
         {/* Left: User & Room Info */}
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-[#e10098] flex items-center justify-center text-sm font-bold text-white uppercase shrink-0 font-heading">
+          <div className="flex items-center gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#ede9fe] text-sm font-bold uppercase text-[#4338ca] font-heading">
             {Sender?.[0] || "?"}
           </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-white tracking-tight font-heading">
-                {Sender || "Anonymous"}
-              </span>
-              <span className="text-[10px] font-mono uppercase font-semibold px-1.5 py-0.2 rounded bg-[#181820] text-[#38bdf8] border border-[#26262f]">
-                You
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5 text-xs text-[#71717a]">
-              <span>Room:</span>
-              <span className="font-mono font-semibold text-white">{roomName || "..."}</span>
+            <div className="min-w-0">
+              <div className="truncate text-sm font-bold tracking-tight text-[#0f172a] font-heading">
+                {roomName || "Room"}
+              </div>
+              <div className="text-xs text-[#64748b]">
+                Signed in as {Sender || "Anonymous"}
+              </div>
             </div>
           </div>
-        </div>
 
         {/* Right: Room Status, Link Share & Leave */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2">
           {/* Active members pill */}
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#141419] border border-[#26262e] text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-[#38bdf8]"></span>
-            <span className="text-[#a1a1aa] font-medium">
+          <div className="hidden items-center gap-2 text-xs text-[#64748b] sm:flex">
+            <span className="h-2 w-2 rounded-full bg-[#22c55e]"></span>
+            <span>
               {Count > 1 ? `${Count} active in room` : "Waiting for peer..."}
             </span>
           </div>
@@ -313,15 +308,15 @@ const Page = () => {
           <button
             type="button"
             onClick={handleCopyLink}
-            className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141419] hover:bg-[#1c1c24] border border-[#26262e] text-xs font-mono font-medium text-[#a1a1aa] hover:text-white transition-colors cursor-pointer"
+            className="hidden items-center gap-1.5 rounded-sm border border-[#e2e8f0] bg-white px-3 py-1.5 text-xs font-medium text-[#475569] transition-colors hover:border-[#ddd6fe] hover:bg-[#f5f3ff] hover:text-[#4338ca] md:inline-flex"
             title="Copy invite link"
           >
             {copied ? (
               <>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4f46e5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
-                <span className="text-[#38bdf8]">Link Copied!</span>
+                <span className="text-[#4f46e5]">Copied</span>
               </>
             ) : (
               <>
@@ -336,8 +331,8 @@ const Page = () => {
 
           {/* Leave Room CTA */}
           <Link
-            href="/create"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#181820] hover:bg-[#20202a] border border-[#26262f] text-[#a1a1aa] hover:text-white text-xs font-mono font-semibold transition-colors cursor-pointer"
+            href="/"
+            className="inline-flex items-center gap-1.5 rounded-sm px-3 py-1.5 text-xs font-semibold text-[#64748b] transition-colors hover:bg-[#f1f5f9] hover:text-[#0f172a]"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
@@ -347,17 +342,19 @@ const Page = () => {
             <span>Leave</span>
           </Link>
         </div>
+        </div>
       </div>
 
       {/* Messages Stream Container */}
       <div
         ref={messageContainerRef}
-        className="relative z-10 flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-4 overflow-x-hidden bg-[#0b0b0e]"
+        className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden px-4 py-6 sm:px-6"
       >
+        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
         {/* Empty State */}
         {messages.length === 0 && showMessagesToNewUser.length < 1 && (
-          <div className="flex flex-col items-center justify-center h-full max-w-sm mx-auto text-center px-4 py-12 select-none">
-            <div className="w-14 h-14 rounded-2xl bg-[#141419] border border-[#26262e] text-[#e10098] flex items-center justify-center mb-4">
+          <div className="mx-auto flex h-full max-w-sm select-none flex-col items-center justify-center px-4 py-12 text-center">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#ede9fe] text-[#4f46e5]">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                 <path d="M8 10h.01" strokeWidth="3" />
@@ -365,39 +362,38 @@ const Page = () => {
                 <path d="M16 10h.01" strokeWidth="3" />
               </svg>
             </div>
-            <h3 className="text-base font-bold text-white mb-1 font-heading">Room Created: {roomName}</h3>
-            <p className="text-xs text-[#a1a1aa] leading-relaxed mb-4">
+            <h3 className="mb-1 text-base font-bold text-[#0f172a] font-heading">{roomName || "Your room"} is ready</h3>
+            <p className="mb-4 text-xs leading-relaxed text-[#64748b]">
               Share the room code or URL with your friend. Messages will appear here in real time.
             </p>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#141419] border border-[#26262e] text-[11px] text-[#71717a] font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#38bdf8]"></span>
-              <span>Room names are case-sensitive</span>
-            </div>
+            <button type="button" onClick={handleCopyLink} className="border-b border-[#f59e0b] text-xs font-semibold text-[#4f46e5] transition-colors hover:text-[#4338ca]">
+              Copy invite link
+            </button>
           </div>
         )}
 
         {/* Previously stored messages (if any) */}
         {showMessagesToNewUser.length > 0 && (
-          <div className={`flex flex-col gap-4 mb-6 ${isnewUser ? "" : "hidden"}`}>
-            <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 h-px bg-[#26262e]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#71717a] px-2">
+            <div className={`mb-6 flex flex-col gap-4 ${isnewUser ? "" : "hidden"}`}>
+            <div className="my-4 flex items-center gap-3">
+              <div className="h-px flex-1 bg-[#e2e8f0]" />
+              <span className="px-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#94a3b8]">
                 Earlier Messages
               </span>
-              <div className="flex-1 h-px bg-[#26262e]" />
+              <div className="h-px flex-1 bg-[#e2e8f0]" />
             </div>
 
             {showMessagesToNewUser.map((msg, i) => {
               const isMe = msg.sender === Sender;
               return (
                 <div key={i} className={`flex flex-col gap-1 ${isMe ? "items-end" : "items-start"}`}>
-                  <span className="text-[11px] font-mono font-medium text-[#71717a] px-1">
+                  <span className="px-1 text-[11px] font-mono font-medium text-[#64748b]">
                     {isMe ? "You" : msg.sender || "Anonymous"}
                   </span>
 
                   {msg.replyTo && (
-                    <div className="max-w-[75%] sm:max-w-md bg-[#141419] border-l-2 border-[#38bdf8] px-3 py-1.5 rounded-r-lg text-xs text-[#a1a1aa] mb-1">
-                      <span className="font-mono font-semibold text-[#38bdf8] block text-[10px]">{msg.replyTo.sender}</span>
+                    <div className="mb-1 max-w-[75%] rounded-r-lg border-l-2 border-[#c4b5fd] bg-[#f5f3ff] px-3 py-1.5 text-xs text-[#64748b] sm:max-w-md">
+                      <span className="block text-[10px] font-mono font-semibold text-[#4f46e5]">{msg.replyTo.sender}</span>
                       <span className="truncate block opacity-80">{msg.replyTo.text}</span>
                     </div>
                   )}
@@ -405,14 +401,14 @@ const Page = () => {
                   <div
                     className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-xl text-sm leading-relaxed break-words ${
                       isMe
-                        ? "bg-[#e10098] text-white font-medium"
-                        : "bg-[#181820] text-white border border-[#26262f]"
+                        ? "bg-[#4f46e5] text-white font-medium"
+                        : "border border-[#e2e8f0] bg-white text-[#0f172a]"
                     }`}
                   >
                     {msg.text}
                   </div>
 
-                  <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#71717a]">
+                  <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#94a3b8]">
                     <span>{msg.time || "00:00"}</span>
                     <span>•</span>
                     <button
@@ -421,7 +417,7 @@ const Page = () => {
                         setreplyTo(msg);
                         inputRef.current?.focus();
                       }}
-                      className="text-[#38bdf8] hover:text-[#0ea5e9] font-medium cursor-pointer transition-colors"
+                      className="font-medium text-[#4f46e5] transition-colors hover:text-[#4338ca]"
                     >
                       Reply
                     </button>
@@ -430,12 +426,12 @@ const Page = () => {
               );
             })}
 
-            <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 h-px bg-[#26262e]" />
-              <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-[#38bdf8] px-2">
+            <div className="my-4 flex items-center gap-3">
+              <div className="h-px flex-1 bg-[#e2e8f0]" />
+              <span className="px-2 text-[11px] font-mono font-bold uppercase tracking-widest text-[#4f46e5]">
                 Live Conversation
               </span>
-              <div className="flex-1 h-px bg-[#26262e]" />
+              <div className="h-px flex-1 bg-[#e2e8f0]" />
             </div>
           </div>
         )}
@@ -444,15 +440,15 @@ const Page = () => {
         {messages.map((msg, i) => {
           const isMe = msg.type === "sent";
           return (
-            <div key={i} className={`flex flex-col gap-1 ${isMe ? "items-end" : "items-start"}`}>
-              <span className="text-[11px] font-mono font-medium text-[#71717a] px-1">
+                <div key={i} className={`flex flex-col gap-1 ${isMe ? "items-end" : "items-start"}`}>
+              <span className="px-1 text-[11px] font-mono font-medium text-[#64748b]">
                 {isMe ? "You" : msg.sender || "Anonymous"}
               </span>
 
               {/* Reply Quote Banner */}
               {msg.replyTo && (
-                <div className="max-w-[75%] sm:max-w-md bg-[#141419] border-l-2 border-[#38bdf8] px-3 py-1.5 rounded-r-lg text-xs text-[#a1a1aa] mb-1">
-                  <span className="font-mono font-semibold text-[#38bdf8] block text-[10px]">
+                <div className="mb-1 max-w-[75%] rounded-r-lg border-l-2 border-[#c4b5fd] bg-[#f5f3ff] px-3 py-1.5 text-xs text-[#64748b] sm:max-w-md">
+                  <span className="block text-[10px] font-mono font-semibold text-[#4f46e5]">
                     Replying to {msg.replyTo.sender}
                   </span>
                   <span className="truncate block opacity-80">{msg.replyTo.text}</span>
@@ -463,15 +459,15 @@ const Page = () => {
               <div
                 className={`max-w-[85%] sm:max-w-md px-4 py-2.5 rounded-xl text-sm leading-relaxed break-words ${
                   isMe
-                    ? "bg-[#e10098] text-white font-medium"
-                    : "bg-[#181820] text-white border border-[#26262f]"
+                    ? "bg-[#4f46e5] text-white font-medium"
+                    : "border border-[#e2e8f0] bg-white text-[#0f172a]"
                 }`}
               >
                 {msg.text}
               </div>
 
               {/* Actions & Timestamp */}
-              <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#71717a]">
+              <div className="flex items-center gap-2 px-1 text-[10px] font-mono text-[#94a3b8]">
                 <span>{msg.time || "00:00"}</span>
                 <span>•</span>
                 <button
@@ -480,7 +476,7 @@ const Page = () => {
                     setreplyTo(msg);
                     inputRef.current?.focus();
                   }}
-                  className="text-[#38bdf8] hover:text-[#0ea5e9] font-medium cursor-pointer transition-colors"
+                  className="font-medium text-[#4f46e5] transition-colors hover:text-[#4338ca]"
                 >
                   Reply
                 </button>
@@ -488,24 +484,25 @@ const Page = () => {
             </div>
           );
         })}
+        </div>
       </div>
 
       {/* Floating Reply Preview Bar */}
       {replyTo && (
-        <div className="relative z-20 mx-4 sm:mx-6 mb-2 p-3 rounded-xl border border-[#26262e] bg-[#141419] flex items-center justify-between gap-3 shadow-xl">
+        <div className="relative z-20 mx-auto mb-2 flex w-[calc(100%-2rem)] max-w-3xl items-center justify-between gap-3 rounded-xl border border-[#ddd6fe] bg-[#f5f3ff] p-3 sm:w-[calc(100%-3rem)]">
           <div className="flex items-center gap-3 overflow-hidden min-w-0">
-            <div className="w-1 h-7 rounded-full bg-[#38bdf8] shrink-0" />
+            <div className="h-7 w-1 shrink-0 rounded-full bg-[#a78bfa]" />
             <div className="overflow-hidden">
-              <span className="text-[11px] font-mono font-bold text-[#38bdf8] block tracking-wide">
+              <span className="block text-[11px] font-mono font-bold tracking-wide text-[#4f46e5]">
                 Replying to {replyTo.sender}
               </span>
-              <p className="text-xs text-[#a1a1aa] truncate">{replyTo.text}</p>
+              <p className="truncate text-xs text-[#64748b]">{replyTo.text}</p>
             </div>
           </div>
           <button
             type="button"
             onClick={() => setreplyTo(null)}
-            className="w-6 h-6 rounded-md bg-[#202028] hover:bg-[#2a2a35] flex items-center justify-center text-[#a1a1aa] hover:text-white transition-colors shrink-0 cursor-pointer"
+            className="flex h-6 w-6 shrink-0 items-center justify-center rounded-sm text-[#64748b] transition-colors hover:bg-white hover:text-[#0f172a]"
             title="Cancel reply"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -517,8 +514,8 @@ const Page = () => {
       )}
 
       {/* Message Input Form */}
-      <div className="relative z-20 p-3.5 sm:px-6 border-t border-[#26262e] bg-[#0e0e12]">
-        <form onSubmit={handlesubmit} className="max-w-7xl mx-auto flex items-center gap-3">
+      <div className="relative z-20 border-t border-[#e2e8f0] bg-white p-3.5 sm:px-6">
+        <form onSubmit={handlesubmit} className="mx-auto flex max-w-3xl items-center gap-3">
           <input
             type="text"
             style={{ display: "none" }}
@@ -543,14 +540,14 @@ const Page = () => {
               value={message}
               onChange={(e) => setmessage(e.target.value)}
               onPaste={handlePaste}
-              className="w-full px-4 py-3 rounded-lg text-sm text-white placeholder-[#71717a] bg-[#16161c] border border-[#26262f] outline-none focus:border-[#e10098] transition-colors"
+              className="w-full rounded-sm border border-[#cbd5e1] bg-white px-4 py-3 text-sm text-[#0f172a] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#4f46e5]"
             />
           </div>
 
           <button
             type="submit"
             disabled={!message.trim()}
-            className="w-11 h-11 rounded-lg bg-[#e10098] hover:bg-[#c90087] text-white font-bold flex items-center justify-center transition-colors disabled:opacity-40 disabled:pointer-events-none cursor-pointer shrink-0 font-mono"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm bg-[#4f46e5] font-mono font-bold text-white transition-colors hover:bg-[#4338ca] disabled:pointer-events-none disabled:opacity-40"
             aria-label="Send message"
           >
             <svg

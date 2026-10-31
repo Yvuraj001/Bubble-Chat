@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 
-export const Button1 = ({ text, href = "/create", className = "" }) => {
+export const Button1 = ({ text, href = "/", className = "" }) => {
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#e10098] hover:bg-[#c90087] transition-colors cursor-pointer ${className}`}
+      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-mono font-semibold text-sm text-white bg-[#38bdf8] hover:bg-[#0ea5e9] transition-colors cursor-pointer ${className}`}
     >
       <span>{text}</span>
       <svg
